@@ -22,13 +22,13 @@ font-family: 'Open Sans', sans-serif; */
   /* 1 */
 }
 
-.icons{
+.menu{
   display: flex;
   flex-flow: row;
   margin-block: auto;
   justify-content: flex-end;
 }
-.material-icons {
+.icons {
   font-size: 2em;
   padding: 10px;
 }
@@ -78,6 +78,20 @@ font-family: 'Open Sans', sans-serif; */
   width: 500px;
   justify-content: center;
   text-align: center;
+}
+.keyboard-tile {
+  width: 40px;
+  height: 50px;
+  margin: 5px;
+  background-color: lightgrey;
+  border-radius: 5px;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .colorBlue {
@@ -140,12 +154,8 @@ main {
   font-family: 'Noto Sans Display', sans-serif;
 }
 
-figure, figure img {
-  max-width: 600px;
-  justify-content: center;
-  text-align: center;
-  display: block;
-  margin: 20px auto;
+img {
+  margin: auto;
 }
 
 h1, h2 {

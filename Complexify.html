@@ -15,9 +15,9 @@
 <body>
     <div class = "container">
         <header>
-            <div class="icons">
-              <span class="material-icons">&#xea23;</span>
-              <span class="material-icons">&#xe8b8;</span>
+            <div class="menu">
+              <span class="icons material-icons">&#xea23;</span>
+              <span class="icons material-icons">&#xe8b8;</span>
             </div>
             <h1 class="title">Complexify</h1>
 
@@ -35,32 +35,31 @@
               <!-- Auto fill with javascript -->
             </section>
             <section id="key-board" class="keyboard">
-              <div class="game-tile">0</div>
-              <div class="game-tile">1</div>
-              <div class="game-tile">2</div>
-              <div class="game-tile">3</div>
-              <div class="game-tile">4</div>
-              <div class="game-tile">5</div>
-              <div class="game-tile">6</div>
-              <div class="game-tile">7</div>
-              <div class="game-tile">8</div>
-              <div class="game-tile">9</div>
+              <div class="keyboard-tile" onClick="addTile('0')">0</div>
+              <div class="keyboard-tile" onClick="addTile('1')">1</div>
+              <div class="keyboard-tile" onClick="addTile('2')">2</div>
+              <div class="keyboard-tile" onClick="addTile('3')">3</div>
+              <div class="keyboard-tile" onClick="addTile('4')">4</div>
+              <div class="keyboard-tile" onClick="addTile('5')">5</div>
+              <div class="keyboard-tile" onClick="addTile('6')">6</div>
+              <div class="keyboard-tile" onClick="addTile('7')">7</div>
+              <div class="keyboard-tile" onClick="addTile('8')">8</div>
+              <div class="keyboard-tile" onClick="addTile('9')">9</div>
 
-              <div class="game-tile">+</div>
-              <div class="game-tile">-</div>
-              <div class="game-tile">*</div>
-              <div class="game-tile">/</div>
-              <div class="game-tile">
+              <div class="keyboard-tile" onClick="addTile('+')">+</div>
+              <div class="keyboard-tile" onClick="addTile('-')">-</div>
+              <div class="keyboard-tile" onClick="addTile('*')">*</div>
+              <div class="keyboard-tile" onClick="addTile('/')">/</div>
+              <div id="square" class="keyboard-tile" onClick="addSquare()">
                 <div class="row">
                   <div>☐</div>
                   <div class="column square">2</div>
                 </div>
               </div>
-              <div class="game-tile">(</div>
-              <div class="game-tile">)</div>
-              <div class="game-tile"></div>
-              <!-- <a href="https://www.flaticon.com/free-icons/enter" title="enter icons">Enter icons created by Google - Flaticon</a> -->
-              <span class="material-icons">&#xe8b8;</span>
+              <div class="keyboard-tile" onClick="addTile('(')">(</div>
+              <div class="keyboard-tile" onClick="addTile(')')">)</div>
+              <span id="enter" class="material-icons keyboard-tile" onClick="enterTiles()">&#xe31b;</span>
+              <span id="delete" class="material-icons keyboard-tile" onClick="deleteTile()">&#xe14a;</span>
             </section>
 
         </main>
