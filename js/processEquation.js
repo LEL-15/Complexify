@@ -35,12 +35,12 @@ export function processAnswer(answer, entered, prompt){
   var legal = true
   var blues = []
   var greens = []
-  var cleanAnswer = mathClean(answer)
-  legal = cleanAnswer[1]
-  cleanAnswer = cleanAnswer[0]
+  var cleanEntered = mathClean(entered)
+  legal = cleanEntered[1]
+  cleanEntered = cleanEntered[0]
   //Only proceed if the equation is legal math
   if(legal){
-    var simplified = math.rationalize(cleanAnswer).toString().replace(/\s/g, "")
+    var simplified = math.rationalize(cleanEntered).toString().replace(/\s/g, "")
     if (simplified === prompt){
       valid = true
     }
@@ -68,5 +68,3 @@ export function processAnswer(answer, entered, prompt){
       "legal": legal
     };
   return dict
-}
-console.log(processAnswer("(x+1)^ - 1", "(x+1)^ - 1", "x^+2x"))

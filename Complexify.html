@@ -10,9 +10,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stats.css">
     <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
     <script type="module" src="js\script.js"></script>
     <script type="module" src="js\processEquation.js"></script>
+    <script type="module" src="js\stats.js"></script>
 </head>
 
 <body>
@@ -66,7 +68,15 @@
               <span id="delete" class="material-icons keyboard-tile">&#xe14a;</span>
               <script type="module">import {addSquare, addTile, deleteTile, enterTiles} from "./js/script.js";</script>
             </section>
-
+            <div id="stats">
+              <h2> Statistics </h2>
+              <span class="row" class="flex-fit">
+                <p class="stat" id="win%"> Win%: </p>
+                <p class="stat" id="current_streak">Current Streak: </p>
+                <p class="stat" id="max_streak">Max Streak: </p>
+                <p class="stat" id="games_played">Games Played: </p>
+              </span>
+            </div>
         </main>
         <footer>
 
