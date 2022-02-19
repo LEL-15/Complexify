@@ -22,14 +22,71 @@ font-family: 'Open Sans', sans-serif; */
   /* 1 */
 }
 
+.icons{
+  display: flex;
+  flex-flow: row;
+  margin-block: auto;
+  justify-content: flex-end;
+}
+.material-icons {
+  font-size: 2em;
+  padding: 10px;
+}
+.title {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  text-align: center;
+}
+.equation {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+.board {
+  margin: 20px auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  text-align: center;
+}
+.tries {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  text-align: center;
+}
+.game-tile {
+  width: 40px;
+  height: 50px;
+  margin: 5px;
+  background-color: lightgrey;
+  border-radius: 5px;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+
+.colorBlue {
+  background-color: blue;
+}
+
+
+
+
 body {
-    background-color: #EBD3B7; /*could also do bisque*/
+    background-color: white; /*could also do bisque*/
     font-size: 16px; /*em is all based on body font size*/
 
 }
 
 header {
-  text-align: center;
+
 }
 
 nav ul {
@@ -45,7 +102,7 @@ nav li a {
   text-decoration: none;
   font-family: 'Merriweather', serif;
   font-size: 1.25em;
-  color: #3D231A;
+  color: black;
 }
 
 main {
@@ -62,8 +119,9 @@ figure, figure img {
 
 h1, h2 {
     font-family: 'Merriweather', serif;
-    margin-block: 2em;
-    color: #3D231A;
+    color: black;
+    margin-block: 0.5em;
+
 }
 
 p {

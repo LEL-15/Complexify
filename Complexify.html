@@ -7,40 +7,48 @@
 
     <title>Complexify</title>
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
     <div class = "container">
         <header>
-            <h1>Complexify</h1>
+            <div class="icons">
+              <span class="material-icons">&#xea23;</span>
+              <span class="material-icons">&#xe8b8;</span>
+            </div>
+            <h1 class="title">Complexify</h1>
+
+
         </header>
-
-        <nav>
-          <h2 class="sr-only">Main Navigation</h2>
-          <ul>
-            <li><a href='#Chapter1'>link 1 - Chapter 1</a></li>
-          </ul>
-        </nav>
-
         <main>
-            <section>
-
-                <h2 class="sr-only" id="Hidden-header">Hidden H2 header for picture</h2>
-                <figure>
-                  <img src="original_images\Leonard_Nimoy_William_Shatner_Star_Trek_1968.JPG" alt="Leonard Nimoy and William Shatner as Mr. Spock and Captain Kirk from the television program Star Trek in black and white.">
-                  <figcaption>Publicity photo of Leonard Nimoy and William Shatner as Mr. Spock and Captain Kirk from the television program Star Trek.</figcaption>
-                </figure>
-
-                
+            <section class="equation">
+              <math id="daily-equation">
+                (x+2)<sup>2</sup>+x-6
+              </math>
             </section>
+
+            <section id="game-board" class="board" >
+              <!-- Auto fill with javascript -->
+            </section>
+            <section id="key-board" class="keyBoard">
+              <div>
+                <span class="material-icons">&#xe145;</span>
+              </div>
+              <div>
+
+              </div>
+            </section>
+
         </main>
         <footer>
 
         </footer>
 
     </div>
+    <script type="text/javascript" src="js\script.js"></script>
 </body>
 
 </html>
