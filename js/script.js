@@ -1,52 +1,20 @@
+import { processAnswer } from './processEquation.js';
 
 console.log("It's working!")
-
-// class KeyboardValues {
-//
-//   static zero = new KeyboardValues('0');
-//   static one = new KeyboardValues('1');
-//   static two = new KeyboardValues('2');
-//   static three = new KeyboardValues('3');
-//   static four = new KeyboardValues('4');
-//   static five = new KeyboardValues('5');
-//   static six = new KeyboardValues('6');
-//   static seven = new KeyboardValues('7');
-//   static eight = new KeyboardValues('8');
-//   static nine = new KeyboardValues('9');
-//
-//
-//   static Plus = new KeyboardValues('+');
-//   static Minus = new KeyboardValues('-');
-//   static Multiply = new KeyboardValues('*');
-//   static Divide = new KeyboardValues('/');
-//   static Plus = new KeyboardValues('+');
-//   static Minus = new KeyboardValues('-');
-//   static Multiply = new KeyboardValues('*');
-//   static Divide = new KeyboardValues('/');
-//
-//   static square = new KeyboardValues('^');
-//
-//   static enter = new KeyboardValues('enter');
-//   static back = new KeyboardValues('back');
-//
-//
-//   constructor(name) {
-//     this.name = name;
-//   }
-//   // toString() {
-//   //   return `Color.${this.name}`;
-//   // }
-// }
 
 var boardState = ["", "", "", "", "", ""];
 var currentGuess = 0;
 var numTries = 6;
 var numGameTiles = 10;
-// let board = document.getElementsByClassName('board')
+var numKeyboard = 20;
+var prompt = "x^+5x-2";
+var answer = "(x+2)^+x-6";
 
 // Setup environment
+// clear localStorage
 localStorage.setItem('tile', "");
 localStorage.setItem('boardState', boardState);
+// Setup empty board
 for(var i=0; i < numTries; i++){
   let tries = document.createElement('div');
   tries.className = "tries";
@@ -63,25 +31,35 @@ for(var i=0; i < numTries; i++){
   document.getElementById('game-board').appendChild(tries);
 }
 
-// tries1 = document.getElementById("tries1");
-// tries1gameTiles = document.getElementsByClassName("tries1");
-// for(var i=0; i < tries1gameTiles.length; i++){
-//   tries1gameTiles[i].className = tries1gameTiles[i].className + "colorBlue";
-//   console.log("Color changed")
-// }
+var fullKeyboard = document.getElementsByClassName("keyboard-tile");
+for(var i=0; i < fullKeyboard.length; i++ ){
+  if(fullKeyboard[i].id === "square"){
+    fullKeyboard[i].addEventListener("click", function(){
+      addSquare();
+    })
+  }
+  else if(fullKeyboard[i].id === "enter"){
+    fullKeyboard[i].addEventListener("click", function(){
+      enterTiles();
+    })
+  }
+  else if(fullKeyboard[i].id === "delete"){
+    fullKeyboard[i].addEventListener("click", function(){
+      deleteTile();
+    })
+  }
+  else{
+    fullKeyboard[i].addEventListener("click", function(){
+      let mode = this.dataset.mode;
+      addTile(mode);
+    })
+  }
 
-// let keyboard = document.getElementsByClassName('keyboard-tile')
-//
-// for(var i=0; keyboard.length > i; i++){
-//   keyboard[i].addEventListener("click", function(){
-//     let mode = this.dataset.mode
-//     console.log("Option Clicked: ", mode)
-//     setTheme(mode)
-//   })
-// }
+}
 
-function addSquare(){
-  currentTiles = localStorage.getItem('tile');
+// add a square root tile to the game board
+export function addSquare(){
+  var currentTiles = localStorage.getItem('tile');
   if (currentTiles.length < 10){
     let triesCurrent = document.getElementById("tries"+currentGuess);
     let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
@@ -90,8 +68,9 @@ function addSquare(){
     addTileLocalStorage("^");
   }
 }
-function addTile(tile){
-  currentTiles = localStorage.getItem('tile');
+// add a regular number or operation to the game board
+export function addTile(tile){
+  var currentTiles = localStorage.getItem('tile');
   if (currentTiles.length < 10){
     let triesCurrent = document.getElementById("tries"+currentGuess);
     let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
@@ -99,9 +78,10 @@ function addTile(tile){
     addTileLocalStorage(tile);
   }
 }
+// add tile value to the localStorage
 function addTileLocalStorage(tile){
   console.log("Option Clicked: ", tile);
-  currentTiles = localStorage.getItem('tile');
+  var currentTiles = localStorage.getItem('tile');
   if (currentTiles === null){
     localStorage.setItem('tile', tile);
   }
@@ -109,10 +89,11 @@ function addTileLocalStorage(tile){
     localStorage.setItem('tile', currentTiles + tile);
   }
 }
-function deleteTile(){
+// remove a tile from the game board and from localStorage
+export function deleteTile(){
   // as long as localStorage.tile length > 0 remove most recent tile
   // set most recent tile to 0
-  currentTiles = localStorage.getItem('tile');
+  var currentTiles = localStorage.getItem('tile');
   if( currentTiles !== null && currentTiles.length > 0){
     localStorage.setItem('tile', currentTiles.substring(0, currentTiles.length-1));
     let triesCurrent = document.getElementById("tries"+currentGuess);
@@ -120,17 +101,46 @@ function deleteTile(){
     gameTile.innerHTML = "";
   }
 }
-function enterTiles(){
+// enter the guess for checking
+export function enterTiles(){
   // check tiles to be valid equation
   // if valid then change localStorage.tile value to boardState[currentGuess]
   // compare with solution and change tile colors
-  currentTiles = localStorage.getItem('tile');
-  if( currentTiles !== null && currentTiles.length === 10){
-    boardState[currentGuess] = currentTiles;
-    localStorage.setItem('tile', "");
-    localStorage.setItem("boardState", boardState);
-    currentGuess += 1;
+  var currentTiles = localStorage.getItem('tile');
+  // var dict = {
+  //     "valid": false, // valid, // boolean matches simplified prompt
+  //     "green": [1,2,3,4] // greens,  // arr of indexs [0,1,2]
+  //     "blues": [5,6,7,8] // blues, // arr of indexs [3,4,5]
+  //     // [0,9] indexes excluded from blue and green should be grey
+  //     "simplified": "4x+85" //simplified, // if valid false then equation simplifies to this
+  //     "right": right, // boolean true if a win!
+  //     "legal": legal // boolean true if a valid math equation
+  //   };
+
+  if(currentTiles !== null && currentTiles.length === 10){
+    var dict = processAnswer(answer, currentTiles, prompt);
+    // check math
+    if (dict["win"]){
+      // call win pop up
+      console.log("you win");
+    }
+    else if (!dict["valid"]){
+      console.log("Your equation does not simplify to "+ prompt + ". It simplfies to " + dict["simplified"]);
+      console.log("try again");
+      // error log?
+    }
+    else if(dict["legal"] && dict["valid"]){
+      boardState[currentGuess] = currentTiles;
+      localStorage.setItem('tile', "");
+      localStorage.setItem("boardState", boardState);
+      currentGuess += 1;
+      // check win
+      console.log("legal and valid");
+    }
+    else {
+      console.log("try again");
+      // error log?
+    }
+
   }
-
-
 }
