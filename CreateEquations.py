@@ -156,7 +156,7 @@ simplified = []
 x = symbols('x')
 for equation in simple_ready:
     equation = eval(equation)
-    simplified.append(simplify(equation))
+    simplified.append(expand(equation))
 print(simplified)
 simplified_good = []
 equations_good = []
@@ -168,8 +168,6 @@ for equation in range(len(simplified)):
     for index in indices:
         if simple_equation[index+2] != 2:
             good = False
-    if len(indices)!=0 and "x*(" in simple_equation:
-        good = False
     if good:
         simplified_good.append(simple_equation)
         equations_good.append(equations[equation])
