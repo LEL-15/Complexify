@@ -112,6 +112,9 @@ function deleteTile(){
   currentTiles = localStorage.getItem('tile');
   if( currentTiles !== null && currentTiles.length > 0){
     localStorage.setItem('tile', currentTiles.substring(0, currentTiles.length-1));
+    let triesCurrent = document.getElementById("tries"+currentGuess);
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
+    gameTile.innerHTML = "";
   }
 }
 function enterTiles(){
