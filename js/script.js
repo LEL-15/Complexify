@@ -81,20 +81,23 @@ for(var i=0; i < numTries; i++){
 // }
 
 function addSquare(){
-  let triesCurrent = document.getElementById("tries"+currentGuess);
-  let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
-  let square = document.getElementById("square");
-  gameTile.innerHTML = square.innerHTML;
-
-  addTileLocalStorage("^");
+  currentTiles = localStorage.getItem('tile');
+  if (currentTiles.length < 10){
+    let triesCurrent = document.getElementById("tries"+currentGuess);
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
+    let square = document.getElementById("square");
+    gameTile.innerHTML = square.innerHTML;
+    addTileLocalStorage("^");
+  }
 }
 function addTile(tile){
-  let triesCurrent = document.getElementById("tries"+currentGuess);
-  console.log(triesCurrent.id);
-  let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
-  gameTile.innerHTML = tile;
-
-  addTileLocalStorage(tile);
+  currentTiles = localStorage.getItem('tile');
+  if (currentTiles.length < 10){
+    let triesCurrent = document.getElementById("tries"+currentGuess);
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
+    gameTile.innerHTML = tile;
+    addTileLocalStorage(tile);
+  }
 }
 function addTileLocalStorage(tile){
   console.log("Option Clicked: ", tile);
@@ -102,7 +105,7 @@ function addTileLocalStorage(tile){
   if (currentTiles === null){
     localStorage.setItem('tile', tile);
   }
-  else if (currentTiles.length < 10) {
+  else {
     localStorage.setItem('tile', currentTiles + tile);
   }
 }
@@ -112,6 +115,9 @@ function deleteTile(){
   currentTiles = localStorage.getItem('tile');
   if( currentTiles !== null && currentTiles.length > 0){
     localStorage.setItem('tile', currentTiles.substring(0, currentTiles.length-1));
+    let triesCurrent = document.getElementById("tries"+currentGuess);
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
+    gameTile.innerHTML = "";
   }
 }
 function enterTiles(){
