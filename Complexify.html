@@ -11,6 +11,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+    <script type="module" src="js\script.js"></script>
     <script type="module" src="js\processEquation.js"></script>
 </head>
 
@@ -37,40 +38,41 @@
               <!-- Auto fill with javascript -->
             </section>
             <section id="key-board" class="keyboard">
-              <div class="keyboard-tile" onClick="addTile('0')">0</div>
-              <div class="keyboard-tile" onClick="addTile('1')">1</div>
-              <div class="keyboard-tile" onClick="addTile('2')">2</div>
-              <div class="keyboard-tile" onClick="addTile('3')">3</div>
-              <div class="keyboard-tile" onClick="addTile('4')">4</div>
-              <div class="keyboard-tile" onClick="addTile('5')">5</div>
-              <div class="keyboard-tile" onClick="addTile('6')">6</div>
-              <div class="keyboard-tile" onClick="addTile('7')">7</div>
-              <div class="keyboard-tile" onClick="addTile('8')">8</div>
-              <div class="keyboard-tile" onClick="addTile('9')">9</div>
+              <div class="keyboard-tile" data-mode='0' >0</div>
+              <div class="keyboard-tile" data-mode='1' >1</div>
+              <div class="keyboard-tile" data-mode='2' >2</div>
+              <div class="keyboard-tile" data-mode='3' >3</div>
+              <div class="keyboard-tile" data-mode='4' >4</div>
+              <div class="keyboard-tile" data-mode='5' >5</div>
+              <div class="keyboard-tile" data-mode='6' >6</div>
+              <div class="keyboard-tile" data-mode='7' >7</div>
+              <div class="keyboard-tile" data-mode='8' >8</div>
+              <div class="keyboard-tile" data-mode='9' >9</div>
 
-              <div class="keyboard-tile" onClick="addTile('+')">+</div>
-              <div class="keyboard-tile" onClick="addTile('-')">-</div>
-              <div class="keyboard-tile" onClick="addTile('*')">*</div>
-              <div class="keyboard-tile" onClick="addTile('/')">/</div>
-              <div id="square" class="keyboard-tile" onClick="addSquare()">
+              <div class="keyboard-tile" data-mode='+' >+</div>
+              <div class="keyboard-tile" data-mode='-' >-</div>
+              <div class="keyboard-tile" data-mode='*' >*</div>
+              <div class="keyboard-tile" data-mode='/' >/</div>
+              <div class="keyboard-tile" data-mode='X' >X</div>
+              <div id="square" class="keyboard-tile">
                 <div class="row">
                   <div>☐</div>
                   <div class="column square">2</div>
                 </div>
               </div>
-              <div class="keyboard-tile" onClick="addTile('(')">(</div>
-              <div class="keyboard-tile" onClick="addTile(')')">)</div>
-              <span id="enter" class="material-icons keyboard-tile" onClick="enterTiles()">&#xe31b;</span>
-              <span id="delete" class="material-icons keyboard-tile" onClick="deleteTile()">&#xe14a;</span>
+              <div class="keyboard-tile" data-mode='(' >(</div>
+              <div class="keyboard-tile" data-mode=')' >)</div>
+              <span id="enter" class="material-icons keyboard-tile">&#xe31b;</span>
+              <span id="delete" class="material-icons keyboard-tile">&#xe14a;</span>
+              <script type="module">import {addSquare, addTile, deleteTile, enterTiles} from "./js/script.js";</script>
             </section>
 
         </main>
         <footer>
- 
+
         </footer>
 
     </div>
-  <script type="text/javascript" src="js\script.js"></script>
 </body>
 
 </html>

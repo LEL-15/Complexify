@@ -7,7 +7,7 @@ function mathClean(expression){
   //^2 is just ^
   expression = expression.replaceAll('^','^2');
   //No multiplication before paren
-  for (i=0; i < expression.length; i++){
+  for (var i=0; i < expression.length; i++){
     if ((expression[i] === "(" || expression[i] == "x") && i!=0){
       if ("1234567890x".includes(expression[i-1])){
         expression = insert(expression, "*", i)
@@ -22,11 +22,11 @@ function mathClean(expression){
     console.error(error);
     legal = false
   }
-  
+
   return [expression, legal]
 }
 
-function processAnswer(answer, entered, prompt){
+export function processAnswer(answer, entered, prompt){
   answer = answer.replace(/\s/g, "");
   entered = entered.replace(/\s/g, "");
   prompt = mathClean(prompt)[0].replace(/\s/g, "");
@@ -46,7 +46,7 @@ function processAnswer(answer, entered, prompt){
     }
     //Only proceed if the equation matches the simplified prompt
     if (valid){
-      for (i=0; i < answer.length; i++){
+      for (var i=0; i < answer.length; i++){
         if (answer[i] === entered[i]){
           greens.push(i)
         }
