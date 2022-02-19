@@ -15,7 +15,7 @@ for(var i=0; i < numTries; i++){
     gameTiles.className = "game-tile " + tries.idName;
     gameTiles.idName = tries.idName + "game-tiles" + j.toString();
     // console.log(gameTiles.idName);
-    gameTiles.innerHTML = "A";
+    gameTiles.innerHTML = "";
     tries.appendChild(gameTiles);
   }
   document.getElementById('game-board').appendChild(tries);

@@ -53,7 +53,7 @@ font-family: 'Open Sans', sans-serif; */
 .tries {
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
+  justify-content: center;
   text-align: center;
 }
 .game-tile {
@@ -71,9 +71,40 @@ font-family: 'Open Sans', sans-serif; */
   font-weight: bold;
 }
 
+.keyboard {
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  justify-content: center;
+  text-align: center;
+}
 
 .colorBlue {
   background-color: blue;
+}
+
+.row {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+.column {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+}
+.empty-rectangle {
+  border: 5px;
+  border-color: black;
+  width: 15px;
+  height: 25px;
+}
+.square {
+  display: flex;
+  flex-flow: column;
+  justify-content: top;
+  font-size: 0.5em;
 }
 
 
@@ -141,5 +172,9 @@ p {
   figure, figure img {
     max-width: 100%;
     margin: 0 auto;
+  }
+
+  .keyboard {
+    width: 90%;
   }
 }
