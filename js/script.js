@@ -1,4 +1,7 @@
 import { processAnswer } from './processEquation.js';
+import { endGame, displayStats, closeStats } from './stats.js';
+import { displaySettings, closeSettings} from './settings.js';
+import { displayFeedback, displayError, closeFeedback} from './feedback.js';
 
 console.log("It's working!")
 
@@ -54,8 +57,29 @@ for(var i=0; i < fullKeyboard.length; i++ ){
       addTile(mode);
     })
   }
-
 }
+
+//set up addEventListener
+// awards and stats
+document.getElementById("awards").addEventListener("click", function(){
+  displayStats();
+})
+document.getElementById("close_stats").addEventListener("click", function(){
+  closeStats();
+})
+// settings
+document.getElementById("settings").addEventListener("click", function(){
+  displaySettings();
+})
+document.getElementById("close_settings").addEventListener("click", function(){
+  closeSettings();
+})
+// feedback
+document.getElementById("close_feedback").addEventListener("click", function(){
+  closeFeedback();
+})
+
+
 
 // add a square root tile to the game board
 export function addSquare(){
@@ -107,29 +131,20 @@ export function enterTiles(){
   // if valid then change localStorage.tile value to boardState[currentGuess]
   // compare with solution and change tile colors
   var currentTiles = localStorage.getItem('tile');
-  // var dict = {
-  //     "valid": false, // valid, // boolean matches simplified prompt
-  //     "green": [1,2,3,4] // greens,  // arr of indexs [0,1,2]
-  //     "blues": [5,6,7,8] // blues, // arr of indexs [3,4,5]
-  //     // [0,9] indexes excluded from blue and green should be grey
-  //     "simplified": "4x+85" //simplified, // if valid false then equation simplifies to this
-  //     "right": right, // boolean true if a win!
-  //     "legal": legal // boolean true if a valid math equation
-  //   };
-
   if(currentTiles !== null && currentTiles.length === 10){
     var dict = processAnswer(answer, currentTiles, prompt);
-    localStorage.setItem("stats", JSON.stringify(dict));
     // check math
     if (dict["right"]){
       // call win pop up
       console.log("you win");
       setColors(dict["greens"], dict["blues"]);
+      endGame(true);
+    }
+    else if (!dict["legal"]){
+      displayError();
     }
     else if (!dict["valid"]){
-      console.log("Your equation does not simplify to "+ prompt + ". It simplfies to " + dict["simplified"]);
-      console.log("try again");
-      // error log?
+      displayFeedback(prompt, dict["simplified"]);
     }
     else if(dict["legal"] && dict["valid"]){
       // set colors
@@ -140,10 +155,9 @@ export function enterTiles(){
       localStorage.setItem('tile', "");
       localStorage.setItem("boardState", boardState);
       currentGuess += 1;
-    }
-    else {
-      console.log("try again");
-      // error log?
+      if(currentGuess === numTries || currentGuess > numTries){
+        endGame(false);
+      }
     }
 
   }
