@@ -1,4 +1,5 @@
 import { processAnswer } from './processEquation.js';
+import { startGame } from "./start.js"
 
 console.log("It's working!")
 
@@ -7,8 +8,10 @@ var currentGuess = 0;
 var numTries = 6;
 var numGameTiles = 10;
 var numKeyboard = 20;
-var prompt = "x^+5x-2";
-var answer = "(x+2)^+x-6";
+var start = startGame()
+var prompt = start[1];
+console.log(prompt)
+var answer = start[0];
 
 // Setup environment
 // clear localStorage
@@ -119,7 +122,6 @@ export function enterTiles(){
 
   if(currentTiles !== null && currentTiles.length === 10){
     var dict = processAnswer(answer, currentTiles, prompt);
-    localStorage.setItem("stats", JSON.stringify(dict));
     // check math
     if (dict["right"]){
       // call win pop up

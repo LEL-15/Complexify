@@ -40,7 +40,12 @@ export function processAnswer(answer, entered, prompt){
   cleanEntered = cleanEntered[0]
   //Only proceed if the equation is legal math
   if(legal){
-    var simplified = math.rationalize(cleanEntered).toString().replace(/\s/g, "")
+    var simplified = math.simplify(cleanEntered).toString().replace(/\s/g, "")
+    simplified = math.rationalize(simplified).toString().replace(/\s/g, "")
+
+    console.log("We are comparing...")
+    console.log(prompt)
+    console.log(simplified)
     if (simplified === prompt){
       valid = true
     }

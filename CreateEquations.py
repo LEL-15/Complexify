@@ -83,6 +83,10 @@ def fillNoParen(length, start, end_op=False):
                 char_loc -= 1
             else:
                 char_or_operation = pick_operation
+        #Let's not divide by 0
+        elif char == "0":
+            if filled[char_loc-1] == "/":
+                char_loc -= 1
         #Can't put another x or num after x
         elif char == "x":
             #If we just wrote an x and the next character is last, sometimes the last has to be ^2
@@ -121,7 +125,7 @@ def prepareForSimplify(equations):
         answer.append(equation)
     return answer
 
-num_eq = 5
+num_eq = 1000
 num_char = 10
 pick_char = 0
 pick_operation = 1
@@ -148,7 +152,7 @@ for x in range(num_eq):
         after_paren = fillNoParen(num_char-close_paren_loc-1, start=pick_operation, end_op=False)
         equation = replacer(equation, after_paren, close_paren_loc+1)
     equations.append(equation)
-
+write_equations = equations
 equations = prettify(equations)
 print(equations)
 simple_ready = prepareForSimplify(equations)
@@ -157,7 +161,6 @@ x = symbols('x')
 for equation in simple_ready:
     equation = eval(equation)
     simplified.append(expand(equation))
-print(simplified)
 simplified_good = []
 equations_good = []
 for equation in range(len(simplified)):
@@ -168,9 +171,18 @@ for equation in range(len(simplified)):
     for index in indices:
         if simple_equation[index+2] != 2:
             good = False
+    if "x" not in simple_equation:
+        good = False
     if good:
         simplified_good.append(simple_equation)
-        equations_good.append(equations[equation])
+        equations_good.append(write_equations[equation])
 
+f = open("answers.txt", "a")
+f.write(str(equations_good))
+f.close()
+
+f = open("simplified.txt", "a")
+f.write(str(simplified_good))
+f.close()
 print(simplified_good)
 print(equations_good)
