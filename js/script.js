@@ -2,6 +2,8 @@ import { processAnswer } from './processEquation.js';
 import { endGame, displayStats, closeStats } from './stats.js';
 import { displaySettings, closeSettings} from './settings.js';
 import { displayFeedback, displayError, closeFeedback} from './feedback.js';
+import { startGame } from "./start.js"
+
 
 console.log("It's working!")
 
@@ -10,8 +12,10 @@ var currentGuess = 0;
 var numTries = 6;
 var numGameTiles = 10;
 var numKeyboard = 20;
-var prompt = "x^+5x-2";
-var answer = "(x+2)^+x-6";
+var start = startGame()
+var prompt = start[1];
+console.log(prompt)
+var answer = start[0];
 
 // Setup environment
 // clear localStorage
