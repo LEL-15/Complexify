@@ -21,8 +21,9 @@ h2{
   top: 80px;
   left: 8%;
   right: 8%;
-  width: 500px;
-  min-height: fit-content;
+  width: 600px;
+  min-height: 200px;
+  height: fit-content;
 
   background: white;
   border: 5px solid;
@@ -37,11 +38,12 @@ h2{
   display: flex;
   flex-flow: row;
   justify-content: space-around;
+  padding: 20px;
 }
 
 .stat{
   flex-flow: row;
-  margin: 20px;
+  margin: auto;
 }
 
 .close{
@@ -50,7 +52,7 @@ h2{
   top: 0px;
 }
 
-@media screen and (max-width: 600px ) {
+@media screen and (max-width: 700px ) {
   .popup{
     width:90%;
     left: 5%;

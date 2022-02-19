@@ -126,12 +126,8 @@ font-family: 'Open Sans', sans-serif; */
 body {
     background-color: white; /*could also do bisque*/
     font-size: 16px; /*em is all based on body font size*/
-
 }
 
-header {
-
-}
 
 nav ul {
   margin: 50px 0px;
@@ -161,17 +157,16 @@ h1, h2 {
     font-family: 'Merriweather', serif;
     color: black;
     margin-block: 0.5em;
-
 }
 
 p {
     font-family: 'Noto Sans Display', sans-serif;
     line-height: 1.8em;
-    font-size: 1em;
+    font-size: 1.25em;
     margin-block: 2em;
 }
 
-@media screen and (max-width: 600px ) {
+@media screen and (max-width: 700px ) {
   nav ul {
     flex-flow: column nowrap;
     justify-content: space-around;
