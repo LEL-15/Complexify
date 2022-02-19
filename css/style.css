@@ -101,7 +101,7 @@ font-family: 'Open Sans', sans-serif; */
 .row {
   display: flex;
   flex-flow: row;
-  justify-content: center;
+  justify-content: space-around;
 }
 .column {
   display: flex;
@@ -120,7 +120,6 @@ font-family: 'Open Sans', sans-serif; */
   justify-content: top;
   font-size: 0.5em;
 }
-
 
 
 
