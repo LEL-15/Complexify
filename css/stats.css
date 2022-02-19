@@ -11,8 +11,19 @@ h2{
   height: 100px;
   height: fit-content;
   border-radius: 7px;
+  display: none;
 }
 
 .stat{
   flex-flow: row;
+}
+
+.space-between{
+  justify-content: space-around;
+}
+
+.close{
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }

@@ -1,3 +1,15 @@
+function calcDayDiff(date1, date2){
+  // To calculate the time difference of two dates
+  console.log(date1)
+  var Difference_In_Time = date2 - date1;
+  console.log(Difference_In_Time)
+    
+  // To calculate the no. of days between two dates
+  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    
+  return Difference_In_Days
+}
+
 function updateStatsDiv(){
   var dict = JSON.parse(window.localStorage.getItem("stats"));
   if (dict == null){
@@ -6,6 +18,7 @@ function updateStatsDiv(){
     dict["bestStreak"] = 0
     dict["history"] = {"win": 0, "loss": 0}
     dict["gamesPlayed"] = 0
+    dict["lastPlay"] = new Date()
     window.localStorage.setItem("stats", JSON.stringify(dict));
   }
   else{
@@ -20,6 +33,10 @@ function updateStatsDiv(){
     wins.innerHTML = "Win %: " + (dict["history"]["win"] / (dict["history"]["win"] + dict["history"]["loss"])).toString()
   }
   //Write the streak data
+  var now = new Date()
+  if(calcDayDiff(dict["lastPlay"], now) > 1){
+    dict["currentStreak"] = 0
+  }
   var streak = document.getElementById("current_streak");
   streak.innerHTML = "Current Streak: " + dict["currentStreak"]
   
@@ -28,7 +45,7 @@ function updateStatsDiv(){
 
   //Write the games played data
   var played = document.getElementById("games_played");
-  streak.innerHTML = "Games Played: " + dict["gamesPlayed"]
+  played.innerHTML = "Games Played: " + dict["gamesPlayed"]
 }
 
 function endGame(win){
@@ -48,7 +65,14 @@ function endGame(win){
     dict["history"]["loss"] += 1
   }
   window.localStorage.setItem("stats", JSON.stringify(dict));
+  updateStatsDiv()
+  displayStats()
+}
+
+function displayStats(){
+  var stats = document.getElementById("stats");
+  stats.style.display = "block"
 }
 
 updateStatsDiv()
-endGame(true)
+//displayStats()
