@@ -119,10 +119,12 @@ export function enterTiles(){
 
   if(currentTiles !== null && currentTiles.length === 10){
     var dict = processAnswer(answer, currentTiles, prompt);
+    localStorage.setItem("stats", JSON.stringify(dict));
     // check math
-    if (dict["win"]){
+    if (dict["right"]){
       // call win pop up
       console.log("you win");
+      setColors(dict["greens"], dict["blues"]);
     }
     else if (!dict["valid"]){
       console.log("Your equation does not simplify to "+ prompt + ". It simplfies to " + dict["simplified"]);
@@ -130,17 +132,34 @@ export function enterTiles(){
       // error log?
     }
     else if(dict["legal"] && dict["valid"]){
+      // set colors
+      console.log("legal and valid");
+      setColors(dict["greens"], dict["blues"]);
+      // change current Guess
       boardState[currentGuess] = currentTiles;
       localStorage.setItem('tile', "");
       localStorage.setItem("boardState", boardState);
       currentGuess += 1;
-      // check win
-      console.log("legal and valid");
     }
     else {
       console.log("try again");
       // error log?
     }
 
+  }
+  function setColors(greens, blues){
+    let triesCurrent = document.getElementById("tries"+currentGuess);
+    for(var i = 0; i<numGameTiles; i++){
+      let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + i.toString());
+      if(greens.includes(i)){
+        gameTile.style.backgroundColor = "lightgreen";
+      }
+      else if(blues.includes(i)){
+        gameTile.style.backgroundColor = "lightblue";
+      }
+      else{
+        gameTile.style.backgroundColor = "grey";
+      }
+    }
   }
 }
