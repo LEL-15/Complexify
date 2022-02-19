@@ -1,0 +1,18 @@
+h2{
+  text-align: center;
+  border-radius: 7px; 
+}
+#stats{
+  position: absolute;
+  background: #909090;
+  top: 80px;
+  left: 25%;
+  width: 50%;
+  height: 100px;
+  height: fit-content;
+  border-radius: 7px;
+}
+
+.stat{
+  flex-flow: row;
+}
