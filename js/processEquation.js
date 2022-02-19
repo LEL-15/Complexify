@@ -42,11 +42,10 @@ export function processAnswer(answer, entered, prompt){
   if(legal){
     var simplified = math.simplify(cleanEntered).toString().replace(/\s/g, "")
     simplified = math.rationalize(simplified).toString().replace(/\s/g, "")
-
-    console.log("We are comparing...")
-    console.log(prompt)
-    console.log(simplified)
-    if (simplified === prompt){
+    prompt = prompt.replaceAll("**2", "^2")
+    var combined = simplified + "-(" + prompt + ")"
+    var diff = math.rationalize(combined).toString()
+    if (diff === "0"){
       valid = true
     }
     //Only proceed if the equation matches the simplified prompt

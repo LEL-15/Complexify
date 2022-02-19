@@ -169,7 +169,7 @@ for equation in range(len(simplified)):
     indices = [match.start() for match in matches]
     good = True
     for index in indices:
-        if simple_equation[index+2] != 2:
+        if simple_equation[index+2] != "2":
             good = False
     if "x" not in simple_equation:
         good = False
@@ -184,5 +184,6 @@ f.close()
 f = open("simplified.txt", "a")
 f.write(str(simplified_good))
 f.close()
+
 print(simplified_good)
 print(equations_good)
