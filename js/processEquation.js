@@ -55,16 +55,18 @@ export function processAnswer(answer, entered, prompt){
         }
       }
       if (greens.length == answer.length){
+      // if(answer === entered){
         right = true
       }
     }
   }
   var dict = {
       "valid": valid,
-      "green": greens,
+      "greens": greens,
       "blues": blues,
       "simplified": simplified,
       "right": right,
       "legal": legal
     };
   return dict
+}

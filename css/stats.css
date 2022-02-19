@@ -1,6 +1,6 @@
 h2{
   text-align: center;
-  border-radius: 7px; 
+  border-radius: 7px;
 }
 #stats{
   position: absolute;
@@ -11,6 +11,7 @@ h2{
   height: 100px;
   height: fit-content;
   border-radius: 7px;
+  display:none;
 }
 
 .stat{
