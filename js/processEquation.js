@@ -16,6 +16,13 @@ function mathClean(expression){
     }
   }
   //Check valid math
+  try {
+    math.rationalize(expression)
+  } catch (error) {
+    console.error(error);
+    legal = false
+  }
+  
   return [expression, legal]
 }
 
@@ -47,6 +54,9 @@ function processAnswer(answer, entered, prompt){
           blues.push(i)
         }
       }
+      if (greens.length == answer.length){
+        right = true
+      }
     }
   }
   var dict = {
@@ -54,8 +64,9 @@ function processAnswer(answer, entered, prompt){
       "green": greens,
       "blues": blues,
       "simplified": simplified,
-      "right": right
+      "right": right,
+      "legal": legal
     };
   return dict
 }
-console.log(processAnswer("(x+1)^ - 1", "x*(1x)", "x^+2x"))
+console.log(processAnswer("(x+1)^ - 1", "(x+1)^ - 1", "x^+2x"))
