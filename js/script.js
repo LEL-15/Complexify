@@ -192,6 +192,15 @@ export function enterTiles(){
       }
       else{
         gameTile.style.backgroundColor = "grey";
+        var character = gameTile.innerHTML
+        if (character.length > 1){
+          var character_button = document.getElementById("square")
+          character_button.style.backgroundColor = "grey"
+        }
+        else{
+          var character_button = document.getElementById(character)
+          character_button.style.backgroundColor = "grey"
+        }
       }
     }
   }
