@@ -1,3 +1,5 @@
+import { displayInstructions, closeInstructions} from './instructions.js';
+
 function calcDayDiff(date1, date2){
   // To calculate the time difference of two dates
   var Difference_In_Time = date2 - date1;
@@ -17,6 +19,7 @@ function updateStatsDiv(){
     dict["gamesPlayed"] = 0
     dict["lastPlay"] = new Date()
     window.localStorage.setItem("stats", JSON.stringify(dict));
+    displayInstructions();
   }
   else{
     console.log("Got the dict!")

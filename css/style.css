@@ -150,6 +150,7 @@ main {
 }
 
 img {
+  width: 400px;
   margin: auto;
 }
 
@@ -161,9 +162,9 @@ h1, h2 {
 
 p {
     font-family: 'Noto Sans Display', sans-serif;
-    line-height: 1.8em;
+    line-height: 1em;
     font-size: 1.25em;
-    margin-block: 2em;
+    margin-block: 10px;
 }
 
 @media screen and (max-width: 700px ) {
@@ -174,7 +175,7 @@ p {
   }
 
   figure, figure img {
-    max-width: 100%;
+    max-width: 80%;
     margin: 0 auto;
   }
 

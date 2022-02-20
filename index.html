@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/icons8-critical-thinking-24.png"> 
+    <link rel="shortcut icon" href="img/icons8-critical-thinking-24.png">
     <title>Complexify</title>
-    
+
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -25,6 +25,7 @@
         <header>
             <div class="menu">
               <span id="awards" class="icons material-icons">&#xea23;</span>
+              <span id="instructions" class="icons material-icons">&#xe887;</span>
               <span id="settings" class="icons material-icons">&#xe8b8;</span>
             </div>
             <h1 class="title">Complexify</h1>
@@ -99,8 +100,31 @@
                   <p id="feedback"></p>
                 </span>
               </section>
-            </div>
 
+              <section id="instructions_popup" class="popup">
+                <h2> Instructions </h2>
+                <span id="close_instructions" class="icons material-icons close">&#xe5cd;</span>
+                <span class="content-wrapper-instructions">
+                  <p>Complexify the simple algebraic expression in six tries.</p>
+                  <p>Each guess must be a valid 10 character math expression that is equal to the simple expression. Hit the enter tile to submit.</p>
+                  <p>After each guess, the color of the tiles will change to reflect how close the guess is to the Complexify for which we are looking.</p>
+                  <figure>
+                    <img src="img\all-green.png" alt="all green tiles">
+                  </figure>
+                  <p>Green means the tile is in the correct place in the expression. All green means you win!</p>
+                  <figure>
+                    <img src="img\green-blue.png" alt="green and blue tiles">
+                  </figure>
+                  <p>Blue means the tile is in the expression but in the wrong place.</p>
+                  <figure>
+                    <img src="img\green-black.png" alt="green and black tiles">
+                  </figure>
+                  <p>Grey means the tile is not in the expression. Try not to use it again.</p>
+                  <p>Good Luck!</p>
+                  <p style="text-align:center;">A new Complexify is available each day.</p>
+                </span>
+              </section>
+            </div>
         </main>
         <footer>
 

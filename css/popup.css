@@ -40,6 +40,13 @@ h2{
   justify-content: space-around;
   padding: 20px;
 }
+.content-wrapper-instructions{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  padding: 20px;
+  text-align: left;
+}
 
 .stat{
   flex-flow: row;

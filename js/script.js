@@ -2,6 +2,7 @@ import { processAnswer } from './processEquation.js';
 import { endGame, displayStats, closeStats } from './stats.js';
 import { displaySettings, closeSettings} from './settings.js';
 import { displayFeedback, displayError, closeFeedback} from './feedback.js';
+import { displayInstructions, closeInstructions} from './instructions.js';
 import { startGame } from "./start.js"
 
 
@@ -81,6 +82,13 @@ document.getElementById("close_settings").addEventListener("click", function(){
 // feedback
 document.getElementById("close_feedback").addEventListener("click", function(){
   closeFeedback();
+})
+// instructions
+document.getElementById("instructions").addEventListener("click", function(){
+  displayInstructions();
+})
+document.getElementById("close_instructions").addEventListener("click", function(){
+  closeInstructions();
 })
 
 
