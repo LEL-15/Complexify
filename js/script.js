@@ -5,9 +5,6 @@ import { displayFeedback, displayError, closeFeedback} from './feedback.js';
 import { displayInstructions, closeInstructions} from './instructions.js';
 import { startGame } from "./start.js"
 
-
-console.log("It's working!")
-
 var boardState = ["", "", "", "", "", ""];
 var currentGuess = 0;
 var numTries = 6;
@@ -15,7 +12,6 @@ var numGameTiles = 10;
 var numKeyboard = 20;
 var start = startGame()
 var prompt = start[1];
-console.log(prompt)
 var answer = start[0];
 
 // Setup environment
@@ -27,12 +23,10 @@ for(var i=0; i < numTries; i++){
   let tries = document.createElement('div');
   tries.className = "tries";
   tries.id = "tries" + i.toString();
-  // console.log(tries.id);
   for(var j=0; j < numGameTiles; j++){
     let gameTiles = document.createElement('div');
     gameTiles.className = "game-tile " + tries.id;
     gameTiles.id = tries.id + "game-tiles" + j.toString();
-    // console.log(gameTiles.id);
     gameTiles.innerHTML = "";
     tries.appendChild(gameTiles);
   }
@@ -148,7 +142,6 @@ export function enterTiles(){
     // check math
     if (dict["right"]){
       // call win pop up
-      console.log("you win");
       setColors(dict["greens"], dict["blues"]);
       endGame(true);
     }
@@ -160,7 +153,6 @@ export function enterTiles(){
     }
     else if(dict["legal"] && dict["valid"]){
       // set colors
-      console.log("legal and valid");
       setColors(dict["greens"], dict["blues"]);
       // change current Guess
       boardState[currentGuess] = currentTiles;
@@ -179,12 +171,44 @@ export function enterTiles(){
       let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + i.toString());
       if(greens.includes(i)){
         gameTile.style.backgroundColor = "lightgreen";
+        var character = gameTile.innerHTML
+        if (character.length > 1){
+          var character_button = document.getElementById("square")
+          character_button.style.backgroundColor = "lightgreen"
+        }
+        else{
+          var character_button = document.getElementById(character)
+          character_button.style.backgroundColor = "lightgreen"
+        }
+        
       }
       else if(blues.includes(i)){
         gameTile.style.backgroundColor = "lightblue";
+        var character = gameTile.innerHTML
+        if (character.length > 1){
+          var character_button = document.getElementById("square")
+          if (character_button.style.backgroundColor != "lightgreen"){
+            character_button.style.backgroundColor = "lightblue"
+          }
+        }
+        else{
+          var character_button = document.getElementById(character)
+          if (character_button.style.backgroundColor != "lightgreen"){
+            character_button.style.backgroundColor = "lightblue"
+          }
+        }
       }
       else{
         gameTile.style.backgroundColor = "grey";
+        var character = gameTile.innerHTML
+        if (character.length > 1){
+          var character_button = document.getElementById("square")
+          character_button.style.backgroundColor = "grey"
+        }
+        else{
+          var character_button = document.getElementById(character)
+          character_button.style.backgroundColor = "grey"
+        }
       }
     }
   }

@@ -26,14 +26,11 @@ function updateStatsDiv(){
   }
   //Write the win percent
   var wins = document.getElementById("win%");
-  console.log(wins)
   if(dict["gamesPlayed"] == 0){
     wins.innerHTML = "Win %: -"
   }
   else{
-    console.log("Problem")
     wins.innerHTML = "Win %: " + ((dict["history"]["win"] / (dict["history"]["win"] + dict["history"]["loss"])) * 100 ).toString()
-    console.log("No problem")
   }
   //Write the streak data
   var now = new Date()
