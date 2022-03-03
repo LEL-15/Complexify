@@ -2,8 +2,8 @@ export function displayFeedback(prompt, simplified){
   var feedback_popup = document.getElementById("feedback_popup");
   feedback_popup.style.display = "block"
   var prompt_write = prompt.replace("**2", "^2");
-  prompt_write = '$$' + prompt_write + '$$';
-  var simplified_write = '$$' + simplified + '$$';
+  prompt_write = prompt_write ;
+  var simplified_write = simplified ;
   var str = 'Your equation does not simplify to '+ prompt_write + '. It simplifies to ' + simplified_write + '. Try again';
   console.log(str)
   var feedback = document.getElementById("feedback");
