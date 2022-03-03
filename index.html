@@ -10,6 +10,8 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/popup.css">
     <script type="module" src="js\equations.js"></script>
@@ -29,15 +31,11 @@
               <span id="settings" class="icons material-icons">&#xe8b8;</span>
             </div>
             <h1 class="title">Complexify</h1>
-
-
         </header>
         <main>
             <section class="equation">
-              <math id="daily-equation">
-                <!-- (x+2)<sup>2</sup>+x-6 -->
-                <!-- (x+2)<sup>2</sup>+x-6 -->
-              </math>
+              <div id="daily-equation"></div>
+              \(x^2+22\)
             </section>
 
             <section id="game-board" class="board" >
@@ -97,7 +95,7 @@
                 <h2> Feedback </h2>
                 <span id="close_feedback" class="icons material-icons close">&#xe5cd;</span>
                 <span class="content-wrapper">
-                  <p id="feedback"></p>
+                  <div id="feedback"></div>
                 </span>
               </section>
 
