@@ -120,8 +120,27 @@ font-family: 'Open Sans', sans-serif; */
   justify-content: top;
   font-size: 0.5em;
 }
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 2em;
+  margin: 5px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  border: gray;
 
-
+  font-size: 1em;
+  line-height: 1.5em;
+  position: relative;
+}
+.button:active {
+  background-color: #949494;
+}
 
 body {
     background-color: white; /*could also do bisque*/

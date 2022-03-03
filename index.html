@@ -32,7 +32,7 @@
 
 
         </header>
-        <main>
+        <main id="main">
             <section class="equation">
               <math id="daily-equation">
                 <!-- (x+2)<sup>2</sup>+x-6 -->
@@ -108,20 +108,23 @@
                   <p>Complexify the simple algebraic expression in six tries.</p>
                   <p>Each guess must be a valid 10 character math expression that is equal to the simple expression. Each solutions includes parentheses. Hit the enter tile to submit.</p>
                   <p>After each guess, the color of the tiles will change to reflect how close the guess is to the Complexify for which we are looking.</p>
-                  <figure>
+                  <figure class="center-wrapper">
                     <img src="img\all-green.png" alt="all green tiles">
                   </figure>
                   <p>Green means the tile is in the correct place in the expression. All green means you win!</p>
-                  <figure>
+                  <figure class="center-wrapper">
                     <img src="img\green-blue.png" alt="green and blue tiles">
                   </figure>
                   <p>Blue means the tile is in the expression but in the wrong place.</p>
-                  <figure>
+                  <figure class="center-wrapper">
                     <img src="img\green-black.png" alt="green and black tiles">
                   </figure>
                   <p>Grey means the tile is not in the expression. Try not to use it again.</p>
                   <p>Good Luck!</p>
                   <p style="text-align:center;">A new Complexify is available each day.</p>
+                  <span class="center-wrapper">
+                    <button id="close_instructions_continue" class="button">Continue</button>
+                  </span>
                 </span>
               </section>
             </div>

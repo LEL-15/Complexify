@@ -6,3 +6,7 @@ export function closeInstructions(){
   var instructions = document.getElementById("instructions_popup");
   instructions.style.display = "none"
 }
+export function closeInstructionsContinue(){
+  var instructions = document.getElementById("instructions_popup");
+  instructions.style.display = "none"
+}

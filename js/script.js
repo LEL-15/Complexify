@@ -2,7 +2,7 @@ import { processAnswer } from './processEquation.js';
 import { endGame, displayStats, closeStats } from './stats.js';
 import { displaySettings, closeSettings} from './settings.js';
 import { displayFeedback, displayError, closeFeedback} from './feedback.js';
-import { displayInstructions, closeInstructions} from './instructions.js';
+import { displayInstructions, closeInstructions, closeInstructionsContinue} from './instructions.js';
 import { startGame } from "./start.js"
 
 var boardState = ["", "", "", "", "", ""];
@@ -59,6 +59,26 @@ for(var i=0; i < fullKeyboard.length; i++ ){
 }
 
 //set up addEventListener
+// keyboard entry
+document.addEventListener("keydown", function(event){
+  var input = event.key;
+  if( input >= 0 && input <=9 ){
+    addTile(input);
+  }
+  else if ( input.toString() == "x" || input.toString() == "+" || input.toString() == "-" || input.toString() == "*" || input.toString() == "/" || input.toString() == "(" || input.toString() == ")") {
+    addTile(input);
+  }  
+  else if ( input.toString() == "^" ){
+    addSquare();
+  }
+  else if (input == "Enter"){
+    enterTiles();
+  }
+  else if (input == "Backspace"){
+    deleteTile();
+  }
+})
+
 // awards and stats
 document.getElementById("awards").addEventListener("click", function(){
   displayStats();
@@ -82,6 +102,9 @@ document.getElementById("instructions").addEventListener("click", function(){
   displayInstructions();
 })
 document.getElementById("close_instructions").addEventListener("click", function(){
+  closeInstructions();
+})
+document.getElementById("close_instructions_continue").addEventListener("click", function(){
   closeInstructions();
 })
 
