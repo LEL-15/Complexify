@@ -21,9 +21,6 @@ function updateStatsDiv(){
     window.localStorage.setItem("stats", JSON.stringify(dict));
     displayInstructions();
   }
-  else{
-    console.log("Got the dict!")
-  }
   //Write the win percent
   var wins = document.getElementById("win%");
   if(dict["gamesPlayed"] == 0){

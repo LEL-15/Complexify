@@ -12,7 +12,8 @@ function startGame(){
   var answer = get_answer()
   var prompt = document.getElementById("daily-equation")
   var write = answer[1]
-  write = write.replace("**2", "<sup>2</sup>");
+  write = write.replace("**2", "^2");
+  write = "$$" + write + "$$"
   prompt.innerHTML = write
   updateStatsDiv()
   return answer

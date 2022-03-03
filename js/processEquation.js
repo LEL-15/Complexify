@@ -6,9 +6,12 @@ function mathClean(expression){
   var legal = true
   //^2 is just ^
   expression = expression.replaceAll('^','^2');
+  expression = expression.replaceAll('**','^');
   //No multiplication before paren
   for (var i=0; i < expression.length; i++){
     if ((expression[i] === "(" || expression[i] == "x") && i!=0){
+      console.log(i)
+      console.log(expression[i-1])
       if ("1234567890x".includes(expression[i-1])){
         expression = insert(expression, "*", i)
         i+=1
@@ -18,7 +21,8 @@ function mathClean(expression){
   //Check valid math
   try {
     math.rationalize(expression)
-  } catch (error) {
+  } 
+  catch (error) {
     console.error(error);
     legal = false
   }
