@@ -166,7 +166,7 @@ export function enterTiles(){
     if (dict["right"]){
       // call win pop up
       setColors(dict["greens"], dict["blues"]);
-      endGame(true);
+      endGame(true, currentGuess);
     }
     else if (!dict["legal"]){
       displayError();
@@ -183,7 +183,7 @@ export function enterTiles(){
       localStorage.setItem("boardState", boardState);
       currentGuess += 1;
       if(currentGuess === numTries || currentGuess > numTries){
-        endGame(false);
+        endGame(false, currentGuess);
       }
     }
 

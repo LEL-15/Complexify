@@ -16,6 +16,7 @@ function updateStatsDiv(){
     dict["currentStreak"] = 0
     dict["bestStreak"] = 0
     dict["history"] = {"win": 0, "loss": 0}
+    dict["tries"] = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
     dict["gamesPlayed"] = 0
     dict["lastPlay"] = new Date()
     window.localStorage.setItem("stats", JSON.stringify(dict));
@@ -45,7 +46,7 @@ function updateStatsDiv(){
   played.innerHTML = "Games Played: " + dict["gamesPlayed"]
 }
 
-export function endGame(win){
+export function endGame(win, numTries){
   var dict = JSON.parse(window.localStorage.getItem("stats"));
   //Update gamesPlayed
   dict["gamesPlayed"] += 1
@@ -57,6 +58,10 @@ export function endGame(win){
   //Update win/loss stats
   if(win){
     dict["history"]["win"] += 1
+    if (!("tries" in dict)){
+      dict["tries"] = {1: 0, 2: 0, 3: 0, 4:0, 5:0, 6:0}
+    }
+    dict["tries"][numTries+1] += 1
   }
   else{
     dict["history"]["loss"] += 1

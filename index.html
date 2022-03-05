@@ -12,6 +12,7 @@
       rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <SCRIPT SRC="path-to-jsMath/easy/load.js"></SCRIPT>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/popup.css">
     <script type="module" src="js\equations.js"></script>
@@ -94,7 +95,10 @@
                 <h2> Feedback </h2>
                 <span id="close_feedback" class="icons material-icons close">&#xe5cd;</span>
                 <span class="content-wrapper">
-                  <div id="feedback"></div>
+                  <p> Your equation simplifies to : </p>
+                  <div id="feedback_user_simplified"></div>
+                  <p> You can try again to write an equation that simplifies to: </p>
+                  <div id="feedback_prompt_simplified"></div>
                 </span>
               </section>
 

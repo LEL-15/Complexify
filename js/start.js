@@ -13,8 +13,9 @@ function startGame(){
   var prompt = document.getElementById("daily-equation")
   var write = answer[1]
   write = write.replace("**2", "^2");
-  write = "$$" + write + "$$"
-  prompt.innerHTML = write
+  write = write.replace("*", "")
+  write = MathJax.tex2chtml(write, {em: 12, ex: 6, display: false});
+  prompt.appendChild(write);
   updateStatsDiv()
   return answer
 }
