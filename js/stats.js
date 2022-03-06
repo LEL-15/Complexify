@@ -1,4 +1,5 @@
 import { displayInstructions, closeInstructions} from './instructions.js';
+import { writeToStorage, getFromStorage } from './script.js'
 
 function calcDayDiff(date1, date2){
   // To calculate the time difference of two dates
@@ -13,7 +14,7 @@ function calcDayDiff(date1, date2){
 }
 
 function updateStatsDiv(){
-  var dict = JSON.parse(window.localStorage.getItem("stats"));
+  var dict = getFromStorage('stats')
   if (dict == null){
     dict ={}
     dict["currentStreak"] = 0
@@ -22,7 +23,7 @@ function updateStatsDiv(){
     dict["tries"] = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
     dict["gamesPlayed"] = 0
     dict["lastPlay"] = new Date()
-    window.localStorage.setItem("stats", JSON.stringify(dict));
+    writeToStorage(dict, "stats");
     displayInstructions();
   }
   //Write the win percent
@@ -49,9 +50,9 @@ function updateStatsDiv(){
 }
 
 export function endGame(win, numTries){
-  var won = JSON.parse(window.localStorage.getItem("won"));
+  var won = getFromStorage('won');
   if( won == null || won == false){
-    var dict = JSON.parse(window.localStorage.getItem("stats"));
+    var dict = getFromStorage('stats')
     //Update gamesPlayed
     dict["gamesPlayed"] += 1
     //Update streak records
@@ -80,10 +81,10 @@ export function endGame(win, numTries){
     else{
       dict["history"]["loss"] += 1;
     }
-    window.localStorage.setItem("stats", JSON.stringify(dict));
+    writeToStorage(dict, 'stats')
     updateStatsDiv();
     displayStats();
-    localStorage.setItem('won', JSON.stringify(true));
+    writeToStorage(true, 'won')
   }
 }
 
@@ -137,7 +138,7 @@ function displayGraph(stats){
 }
 
 function shareSquares(){
-  var boardState = JSON.parse(window.localStorage.getItem("boardState"));
+  var boardState = getFromStorage('boardState')
   if (boardState[0] != ""){
     var copy = ""
     var date = new Date();

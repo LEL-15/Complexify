@@ -8,16 +8,17 @@ import { startGame } from "./start.js"
 //Constants
 var numTries = 6;
 var numGameTiles = 10;
-var start = startGame()
+var start = startGame(numGameTiles)
 var prompt = start[1];
 var answer = start[0];
 var currentGuess = 0;
 console.log("script is running")
 
-export function begin(){
+export function begin(numGameTilesGiven){
+  numGameTiles = numGameTilesGiven
   //See if reload is new day
   console.log("First thing!")
-  var boardState = JSON.parse(window.localStorage.getItem("boardState"));
+  var boardState = getFromStorage("boardState");
   console.log(boardState)
   //First time!
   if (boardState == null){
@@ -27,20 +28,21 @@ export function begin(){
   else{
     console.log("A returner")
     var now  = new Date();
-    var lastLoad = JSON.parse(window.localStorage.getItem("lastLoad"));
+    var lastLoad = getFromStorage("lastLoad");
     lastLoad = new Date(lastLoad);
     //Reset
     if(lastLoad == null || calcDayDiff(lastLoad, now) > 1){
       console.log("It's a new day!")
       boardState = ["", "", "", "", "", ""];
-      localStorage.setItem('tile', "");
-      localStorage.setItem('won', JSON.stringify(false));
+      writeToStorage("", "tile")
+      writeToStorage(false, "won")
     }
   }
   lastLoad = now;
-  localStorage.setItem('boardState', JSON.stringify(boardState));
-  localStorage.setItem('lastLoad', JSON.stringify(lastLoad));
-  localStorage.setItem('tile', "");
+  writeToStorage(boardState, "boardState")
+  writeToStorage(JSON.stringify(lastLoad), "lastLoad")
+  console.log("writing the tile...")
+  writeToStorage("", "tile")
 
   // Setup empty board
   for(var i=0; i < numTries; i++){
@@ -156,10 +158,10 @@ export function begin(){
 
 // add a square root tile to the game board
 export function addSquare(){
-  var currentTiles = localStorage.getItem('tile');
-  if (currentTiles.length < 10){
+  var currentTiles = getFromStorage('tile')
+  if (currentTiles.length < numGameTiles){
     let triesCurrent = document.getElementById("tries"+currentGuess);
-    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + currentTiles.length);
     let square = document.getElementById("square");
     gameTile.innerHTML = square.innerHTML;
     addTileLocalStorage("^");
@@ -168,35 +170,30 @@ export function addSquare(){
 
 // add a regular number or operation to the game board
 export function addTile(tile){
-  var currentTiles = localStorage.getItem('tile');
-  if (currentTiles.length < 10){
+  var currentTiles = getFromStorage('tile')
+  console.log(currentTiles)
+  if (currentTiles.length < numGameTiles){
     let triesCurrent = document.getElementById("tries"+currentGuess);
-    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + currentTiles.length);
     gameTile.innerHTML = tile;
     addTileLocalStorage(tile);
   }
 }
 // add tile value to the localStorage
 function addTileLocalStorage(tile){
-  console.log("Option Clicked: ", tile);
-  var currentTiles = localStorage.getItem('tile');
-  if (currentTiles === null){
-    localStorage.setItem('tile', tile);
-  }
-  else {
-    localStorage.setItem('tile', currentTiles + tile);
-  }
+  var currentTiles = getFromStorage('tile');
+  writeToStorage(currentTiles + tile, 'tile')
 }
 // remove a tile from the game board and from localStorage
 export function deleteTile(){
   // as long as localStorage.tile length > 0 remove most recent tile
   // set most recent tile to 0
-  var currentTiles = localStorage.getItem('tile');
+  var currentTiles = getFromStorage('tile');
   if( currentTiles !== null && currentTiles.length > 0){
-    localStorage.setItem('tile', currentTiles.substring(0, currentTiles.length-1));
+    writeToStorage(currentTiles.substring(0, currentTiles.length-1), 'tile')
     console.log(currentGuess)
     let triesCurrent = document.getElementById("tries"+currentGuess);
-    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + localStorage.getItem('tile').length);
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + (currentTiles.length-1));
     gameTile.innerHTML = "";
   }
 }
@@ -205,17 +202,17 @@ export function enterTiles(){
   // check tiles to be valid equation
   // if valid then change localStorage.tile value to boardState[currentGuess]
   // compare with solution and change tile colors
-  var currentTiles = localStorage.getItem('tile');
-  var boardState = JSON.parse(window.localStorage.getItem("boardState"));
-  if(currentTiles !== null && currentTiles.length === 10){
+  var currentTiles = getFromStorage('tile');
+  var boardState = getFromStorage("boardState");
+  if(currentTiles !== null && currentTiles.length === numGameTiles){
     var dict = processAnswer(answer, currentTiles, prompt);
     // check math
     if (dict["right"]){
       // call win pop up
       setColors(dict["greens"], dict["blues"]);
       boardState[currentGuess] = currentTiles;
-      localStorage.setItem('tile', "");
-      localStorage.setItem('boardState', JSON.stringify(boardState));
+      writeToStorage("", 'tile')
+      writeToStorage(boardState, 'boardState')
       endGame(true, currentGuess);
     }
     else if (!dict["legal"]){
@@ -229,8 +226,8 @@ export function enterTiles(){
       setColors(dict["greens"], dict["blues"]);
       // change current Guess
       boardState[currentGuess] = currentTiles;
-      localStorage.setItem('tile', "");
-      localStorage.setItem('boardState', JSON.stringify(boardState));
+      writeToStorage("", 'tile')
+      writeToStorage(boardState, 'boardState')
       currentGuess += 1;
       if(currentGuess === numTries || currentGuess > numTries){
         endGame(false, currentGuess);
@@ -291,5 +288,38 @@ function setColors(greens, blues){
         character_button.style.backgroundColor = "grey"
       }
     }
+  }
+}
+
+export function getFromStorage(location){
+  if (numGameTiles == 10){
+    console.log(location)
+    return JSON.parse(window.localStorage.getItem(location));
+  }
+  else{
+    var game = JSON.parse(window.localStorage.getItem("shortGame"));
+    if (game){
+      return game[location]
+    }
+    else{
+      return null
+    }
+  }
+}
+
+export function writeToStorage(data, location){
+  if (numGameTiles == 10){
+    console.log("classic write")
+    localStorage.setItem(location, JSON.stringify(data));
+  }
+  else{
+    console.log("new write")
+    var game = JSON.parse(window.localStorage.getItem("shortGame"));
+    if (!game){
+      game = {}
+    }
+    console.log(game)
+    game[location] = data
+    localStorage.setItem('shortGame', JSON.stringify(game));
   }
 }
