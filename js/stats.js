@@ -137,10 +137,13 @@ function displayGraph(stats){
   });
 }
 
-function shareSquares(){
+function shareSquares(numGameTiles){
   var boardState = getFromStorage('boardState')
   if (boardState[0] != ""){
-    var copy = ""
+    var copy = "Complexify "
+    if (numGameTiles==6){
+      copy += "Short "
+    }
     var date = new Date();
     var month = date.toLocaleString('default', { month: 'long' });
     date = month + " " + date.getDate() + ", " + date.getFullYear() + '\n'
