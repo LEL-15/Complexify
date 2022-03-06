@@ -31,6 +31,7 @@ font-family: 'Open Sans', sans-serif; */
 .icons {
   font-size: 2em;
   padding: 10px;
+  cursor: pointer;
 }
 .title {
   display: flex;

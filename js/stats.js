@@ -44,6 +44,9 @@ function updateStatsDiv(){
   //Write the games played data
   var played = document.getElementById("games_played");
   played.innerHTML = "Games Played: " + dict["gamesPlayed"]
+
+  //Create the graph
+  displayGraph(dict);
 }
 
 export function endGame(win, numTries){
@@ -80,6 +83,43 @@ export function closeStats(){
   stats.style.display = "none"
 }
 
-updateStatsDiv()
-
+function displayGraph(stats){
+  var xValues = Object.keys(stats['tries']);
+  var yValues = Object.values(stats['tries']);
+  var barColors = new Array(Object.keys(stats['tries']).length).fill("lightgreen");
+  console.log(barColors);
+  
+  new Chart("statsChart", {
+    type: "horizontalBar",
+    data: {
+      labels: xValues,
+      scaleLineColor: 'transparent',
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      legend: {display: false},
+      title: {
+        display: true,
+        text: "Number of Guesses History"
+      },
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+              callback: function(value, index, values) {
+                  return '';
+              },
+          },
+          gridLines: {
+              display: false,
+              drawBorder: false,
+          },
+        }],
+      },
+    }
+  });
+}
 export { calcDayDiff, updateStatsDiv }
