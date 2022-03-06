@@ -2,7 +2,9 @@ import { displayInstructions, closeInstructions} from './instructions.js';
 
 function calcDayDiff(date1, date2){
   // To calculate the time difference of two dates
-  var Difference_In_Time = date2-date1;
+  date1 = date1.setHours(0, 0, 0);
+  date2 = date2.setHours(0, 0, 0);
+  var Difference_In_Time = Math.abs(date1 - date2);
   console.log(Difference_In_Time)
   // To calculate the no. of days between two dates
   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
