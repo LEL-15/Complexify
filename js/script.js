@@ -11,6 +11,7 @@ var numGameTiles = 10;
 var currentGuess = 0;
 var prompt = "";
 var answer = "";
+var now  = new Date();
 
 export function begin(numGameTilesGiven){
   numGameTiles = numGameTilesGiven
@@ -19,15 +20,14 @@ export function begin(numGameTilesGiven){
   answer = start[0];
   //See if reload is new day
   var boardState = getFromStorage("boardState");
+  var lastLoad = getFromStorage("lastLoad");
   //First time!
-  if (boardState == null){
+  if (boardState == null || lastLoad==null){
     console.log("first time")
     boardState = ["", "", "", "", "", ""];
   }
   else{
     console.log("A returner")
-    var now  = new Date();
-    var lastLoad = getFromStorage("lastLoad");
     lastLoad = new Date(lastLoad);
     //Reset
     if(lastLoad == null || calcDayDiff(lastLoad, now) > 1){
@@ -175,6 +175,7 @@ export function addSquare(){
 // add a regular number or operation to the game board
 export function addTile(tile){
   var currentTiles = getFromStorage('tile')
+  console.log(currentTiles)
   if (currentTiles.length < numGameTiles){
     let triesCurrent = document.getElementById("tries"+currentGuess);
     let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + currentTiles.length);
@@ -295,7 +296,13 @@ function setColors(greens, blues){
 
 export function getFromStorage(location){
   if (numGameTiles == 10){
-    return JSON.parse(window.localStorage.getItem(location));
+    var temp = window.localStorage.getItem(location);
+    if (temp === null){
+      return null
+    }
+    else{
+      return JSON.parse(temp);
+    }
   }
   else{
     var game = JSON.parse(window.localStorage.getItem("shortGame"));
