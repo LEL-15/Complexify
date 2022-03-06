@@ -20,6 +20,8 @@ export function begin(numGameTilesGiven){
   answer = start[0];
   //See if reload is new day
   var boardState = getFromStorage("boardState");
+  console.log("board states")
+  console.log(boardState)
   var lastLoad = getFromStorage("lastLoad");
   //First time!
   if (boardState == null || lastLoad==null){
@@ -297,8 +299,12 @@ function setColors(greens, blues){
 export function getFromStorage(location){
   if (numGameTiles == 10){
     var temp = window.localStorage.getItem(location);
+    console.log(temp)
     if (temp === null){
       return null
+    }
+    else if(temp == ",,,,,"){
+      return ["", "", "", "", "", ""]
     }
     else{
       return JSON.parse(temp);
