@@ -48,7 +48,7 @@ function updateStatsDiv(){
 
 export function endGame(win, numTries){
   var won = JSON.parse(window.localStorage.getItem("won"));
-  if( won == null || won == False){
+  if( won == null || won == false){
     var dict = JSON.parse(window.localStorage.getItem("stats"));
     //Update gamesPlayed
     dict["gamesPlayed"] += 1
