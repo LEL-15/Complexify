@@ -10,8 +10,6 @@ function mathClean(expression){
   //No multiplication before paren
   for (var i=0; i < expression.length; i++){
     if ((expression[i] === "(" || expression[i] == "x") && i!=0){
-      console.log(i)
-      console.log(expression[i-1])
       if ("1234567890x".includes(expression[i-1])){
         expression = insert(expression, "*", i)
         i+=1
@@ -43,6 +41,7 @@ export function processAnswer(answer, entered, prompt){
   legal = cleanEntered[1]
   cleanEntered = cleanEntered[0]
   //Only proceed if the equation is legal math
+  console.log('checking legal')
   if(legal){
     var simplified = math.simplify(cleanEntered).toString().replace(/\s/g, "")
     simplified = math.rationalize(simplified).toString().replace(/\s/g, "")

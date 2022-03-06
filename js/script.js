@@ -8,18 +8,18 @@ import { startGame } from "./start.js"
 //Constants
 var numTries = 6;
 var numGameTiles = 10;
-var start = startGame(numGameTiles)
-var prompt = start[1];
-var answer = start[0];
 var currentGuess = 0;
 console.log("script is running")
+var prompt = "";
+var answer = "";
 
 export function begin(numGameTilesGiven){
   numGameTiles = numGameTilesGiven
+  var start = startGame(numGameTiles)
+  prompt = start[1];
+  answer = start[0];
   //See if reload is new day
-  console.log("First thing!")
   var boardState = getFromStorage("boardState");
-  console.log(boardState)
   //First time!
   if (boardState == null){
     console.log("first time")
@@ -205,6 +205,7 @@ export function enterTiles(){
   var currentTiles = getFromStorage('tile');
   var boardState = getFromStorage("boardState");
   if(currentTiles !== null && currentTiles.length === numGameTiles){
+    console.log()
     var dict = processAnswer(answer, currentTiles, prompt);
     // check math
     if (dict["right"]){
