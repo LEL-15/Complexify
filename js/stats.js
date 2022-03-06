@@ -54,7 +54,12 @@ export function endGame(win, numTries){
     dict["gamesPlayed"] += 1
     //Update streak records
     var now = new Date();
-    if(calcDayDiff(dict["lastPlay"], now) > 1){
+    console.log("We about to do something exciting!")
+    console.log(now)
+    var compare = new Date(dict['lastPlay'])
+    console.log(compare)
+    console.log(calcDayDiff(compare, now))
+    if(calcDayDiff(compare, now) > 1){
       dict["currentStreak"] = 0
     }
     dict['lastPlay'] = now;
