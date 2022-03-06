@@ -158,10 +158,11 @@ function shareSquares(numGameTiles){
       if (boardState[i] != ""){
         for(let j = 0; j < boardState[i].length; j+=1){
           let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + j);
-          if (gameTile.style.backgroundColor == "lightgreen"){
+          console.log(gameTile.style.backgroundColor)
+          if (gameTile.style.backgroundColor == "rgb(147, 220, 120)"){
             copy += "🟩"
           }
-          else if(gameTile.style.backgroundColor == "lightblue"){
+          else if(gameTile.style.backgroundColor == "rgb(199, 233, 249)"){
             copy += "🟦"
           }
           else{
