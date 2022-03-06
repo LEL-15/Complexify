@@ -1,7 +1,7 @@
 import { processAnswer } from './processEquation.js';
 import { endGame, displayStats, closeStats, calcDayDiff, shareSquares, fade } from './stats.js';
 import { displaySettings, closeSettings} from './settings.js';
-import { displayFeedback, displayError, closeFeedback} from './feedback.js';
+import { displayFeedback, displayError, closeFeedback, closeInvalid} from './feedback.js';
 import { displayInstructions, closeInstructions, closeInstructionsContinue} from './instructions.js';
 import { startGame } from "./start.js"
 
@@ -142,6 +142,9 @@ export function begin(numGameTilesGiven){
   document.getElementById("close_feedback").addEventListener("click", function(){
     closeFeedback();
   })
+  document.getElementById("close_invalid").addEventListener("click", function(){
+    closeInvalid();
+  })
   // instructions
   document.getElementById("instructions").addEventListener("click", function(){
     displayInstructions();
@@ -247,31 +250,31 @@ function setColors(greens, blues){
   for(var i = 0; i<numGameTiles; i++){
     let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + i.toString());
     if(greens.includes(i)){
-      gameTile.style.backgroundColor = "lightgreen";
+      gameTile.style.backgroundColor = "#93dc78";
       var character = gameTile.innerHTML
       if (character.length > 1){
-        var character_button = document.getElementById("square")
-        character_button.style.backgroundColor = "lightgreen"
+        var character_button = document.getElementById("square");
+        character_button.style.backgroundColor = "#93dc78";
       }
       else{
         var character_button = document.getElementById(character)
-        character_button.style.backgroundColor = "lightgreen"
+        character_button.style.backgroundColor = "#93dc78"
       }
       
     }
     else if(blues.includes(i)){
-      gameTile.style.backgroundColor = "lightblue";
+      gameTile.style.backgroundColor = "#c7e9f9";
       var character = gameTile.innerHTML
       if (character.length > 1){
         var character_button = document.getElementById("square")
-        if (character_button.style.backgroundColor != "lightgreen"){
-          character_button.style.backgroundColor = "lightblue"
+        if (character_button.style.backgroundColor != "#93dc78"){
+          character_button.style.backgroundColor = "#c7e9f9"
         }
       }
       else{
         var character_button = document.getElementById(character)
-        if (character_button.style.backgroundColor != "lightgreen"){
-          character_button.style.backgroundColor = "lightblue"
+        if (character_button.style.backgroundColor != "#93dc78"){
+          character_button.style.backgroundColor = "#c7e9f9"
         }
       }
     }

@@ -21,8 +21,9 @@ function mathClean(expression){
     math.rationalize(expression)
   } 
   catch (error) {
-    console.error(error);
     legal = false
+    console.error(error);
+    
   }
 
   return [expression, legal]
@@ -42,6 +43,7 @@ export function processAnswer(answer, entered, prompt){
   cleanEntered = cleanEntered[0]
   //Only proceed if the equation is legal math
   console.log('checking legal')
+  console.log(legal)
   if(legal){
     var simplified = math.simplify(cleanEntered).toString().replace(/\s/g, "")
     simplified = math.rationalize(simplified).toString().replace(/\s/g, "")

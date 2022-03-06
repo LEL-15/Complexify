@@ -25,13 +25,14 @@ export function displayFeedback(prompt, simplified){
   MathJax.startup.document.updateDocument();
 }
 export function displayError(){
-  var feedback_popup = document.getElementById("feedback_popup");
+  var feedback_popup = document.getElementById("invalid_popup");
   feedback_popup.style.display = "block"
-  var str = "Your equation is not valid algebra. Try again";
-  var feedback = document.getElementById("feedback");
-  feedback.innerHTML = str;
 }
 export function closeFeedback(){
   var feedback_popup = document.getElementById("feedback_popup");
+  feedback_popup.style.display = "none"
+}
+export function closeInvalid(){
+  var feedback_popup = document.getElementById("invalid_popup");
   feedback_popup.style.display = "none"
 }
