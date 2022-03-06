@@ -1,5 +1,5 @@
 import { processAnswer } from './processEquation.js';
-import { endGame, displayStats, closeStats, calcDayDiff, shareSquares } from './stats.js';
+import { endGame, displayStats, closeStats, calcDayDiff, shareSquares, fade } from './stats.js';
 import { displaySettings, closeSettings} from './settings.js';
 import { displayFeedback, displayError, closeFeedback} from './feedback.js';
 import { displayInstructions, closeInstructions, closeInstructionsContinue} from './instructions.js';
@@ -232,6 +232,13 @@ export function enterTiles(){
         endGame(false, currentGuess);
       }
     }
+  }
+  else{
+    //Show popup that text copied
+    var popup = document.getElementById("enterPopup");
+    popup.classList.toggle("show");
+    popup.style.opacity = 1;
+    setTimeout(fade, 2000, popup);
   }
 }
 

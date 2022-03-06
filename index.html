@@ -77,7 +77,7 @@
               <span id="delete" class="material-icons keyboard-tile">&#xe14a;</span>
               <script type="module">import {addSquare, addTile, deleteTile, enterTiles} from "./js/script.js";</script>
             </section>
-
+            <div><span class="fade-popup" id="enterPopup">You must fill all of the tiles in the row!</span></div>   
             <div class="grid">
               <section id="stats" class="popup">
                 <h2> Statistics </h2>
@@ -121,22 +121,31 @@
                 <h2> Instructions </h2>
                 <span id="close_instructions" class="icons material-icons close">&#xe5cd;</span>
                 <span class="content-wrapper-instructions">
-                  <p>Complexify the simple algebraic expression in six tries.</p>
-                  <p>Each guess must be a valid 10 character math expression that is equal to the simple expression. Each solutions includes parentheses. Hit the enter tile to submit.</p>
-                  <p>After each guess, the color of the tiles will change to reflect how close the guess is to the Complexify for which we are looking.</p>
+                  <p> Complexify (verb): To make something more complicated</p>
+                  <p>The goal of this game is to guess the correct complexified version of the given simplified expression.</p>
+                  <p>Each guess must be a valid 10 character math expression that is equal to the simple expression.</p>
+                  <p>After each guess, the color of the tiles will change to reflect how close the guess is to correct answer. Here are some examples with the prompt \(-x^2-4x+4\)</p>
+                  <p>Grey means the tile is not in the expression. Try not to use it again.</p>
                   <figure class="center-wrapper">
-                    <img src="img\all-green.png" alt="all green tiles">
-                  </figure>
-                  <p>Green means the tile is in the correct place in the expression. All green means you win!</p>
-                  <figure class="center-wrapper">
-                    <img src="img\green-blue.png" alt="green and blue tiles">
+                    <img src="img\Row1.png" alt="green and black tiles">
                   </figure>
                   <p>Blue means the tile is in the expression but in the wrong place.</p>
                   <figure class="center-wrapper">
-                    <img src="img\green-black.png" alt="green and black tiles">
+                    <img src="img\Row2.png" alt="green and blue tiles">
                   </figure>
-                  <p>Grey means the tile is not in the expression. Try not to use it again.</p>
-                  <p>Good Luck!</p>
+                  <p>Green means the tile is in the correct place in the expression. All green means you win!</p>
+                  <figure class="center-wrapper">
+                    <img src="img\Row3.png" alt="all green tiles">
+                  </figure>
+                  
+                  <p style="text-align:center;">Good Luck!</p>
+                  <p> Tips: </p>
+                  <ul>
+                    <li>You are just looking for a complexified version of the simplified prompt. You will not have to solve for x!</li>
+                    <li>x is not 0, so \(x/x=1\) </li>
+                    <li>Each solution includes exactly one set of parentheses.</li> 
+                    <li>Hit the enter tile to submit.</li> 
+                  </ul>
                   <p style="text-align:center;">A new Complexify is available each day.</p>
                   <span class="center-wrapper">
                     <button id="close_instructions_continue" class="button">Continue</button>

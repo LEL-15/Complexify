@@ -167,10 +167,9 @@ function shareSquares(){
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
   popup.style.opacity = 1;
-  setTimeout(fade, 1000);
+  setTimeout(fade, 1000, popup);
 }
-function fade(){
-  var fadeTarget = document.getElementById("myPopup");
+function fade(fadeTarget){
   var fadeEffect = setInterval(function () {
     if (!fadeTarget.style.opacity) {
         fadeTarget.style.opacity = 1;
@@ -185,4 +184,4 @@ function fade(){
   }, 100)
 }
 
-export { calcDayDiff, updateStatsDiv, shareSquares}
+export { calcDayDiff, updateStatsDiv, shareSquares, fade}

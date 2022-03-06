@@ -83,12 +83,12 @@ h2{
 .fade-popup{
   visibility: hidden;
   width: fit-content;
-  background-color: #555;
-  color: #fff;
+  background-color: lightgrey;
   text-align: center;
   border-radius: 6px;
   padding: 6px;
   margin: 0 auto;
+  display: table;
 }
 
 .show {
