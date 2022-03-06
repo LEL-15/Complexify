@@ -80,3 +80,19 @@ h2{
     margin: 10px;
   }
 }
+.fade-popup{
+  visibility: hidden;
+  width: fit-content;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px;
+  margin: 0 auto;
+}
+
+.show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}

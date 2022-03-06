@@ -1,5 +1,5 @@
 import { processAnswer } from './processEquation.js';
-import { endGame, displayStats, closeStats, calcDayDiff } from './stats.js';
+import { endGame, displayStats, closeStats, calcDayDiff, shareSquares } from './stats.js';
 import { displaySettings, closeSettings} from './settings.js';
 import { displayFeedback, displayError, closeFeedback} from './feedback.js';
 import { displayInstructions, closeInstructions, closeInstructionsContinue} from './instructions.js';
@@ -147,6 +147,9 @@ document.getElementById("close_instructions").addEventListener("click", function
 })
 document.getElementById("close_instructions_continue").addEventListener("click", function(){
   closeInstructions();
+})
+document.getElementById("share").addEventListener("click", function(){
+  shareSquares();
 })
 
 // add a square root tile to the game board

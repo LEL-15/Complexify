@@ -133,4 +133,56 @@ function displayGraph(stats){
     }
   });
 }
-export { calcDayDiff, updateStatsDiv }
+
+function shareSquares(){
+  var boardState = JSON.parse(window.localStorage.getItem("boardState"));
+  if (boardState[0] != ""){
+    var copy = ""
+    var date = new Date();
+    var month = date.toLocaleString('default', { month: 'long' });
+    date = month + " " + date.getDate() + ", " + date.getFullYear() + '\n'
+    copy += date
+    for(let i=0;i < boardState.length; i+=1){
+      let triesCurrent = document.getElementById("tries"+i);
+      if (boardState[i] != ""){
+        for(let j = 0; j < boardState[i].length; j+=1){
+          let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + j);
+          if (gameTile.style.backgroundColor == "lightgreen"){
+            copy += "🟩"
+          }
+          else if(gameTile.style.backgroundColor == "lightblue"){
+            copy += "🟦"
+          }
+          else{
+            copy += "⬜"
+          }
+        }
+        copy += "\n"
+      }
+    }
+  }
+  console.log(copy)
+  navigator.clipboard.writeText(copy);
+  //Show popup that text copied
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+  popup.style.opacity = 1;
+  setTimeout(fade, 1000);
+}
+function fade(){
+  var fadeTarget = document.getElementById("myPopup");
+  var fadeEffect = setInterval(function () {
+    if (!fadeTarget.style.opacity) {
+        fadeTarget.style.opacity = 1;
+    }
+    if (fadeTarget.style.opacity > 0) {
+        fadeTarget.style.opacity -= 0.1;
+    }
+    else {
+        clearInterval(fadeEffect);
+        fadeTarget.classList.toggle("show");
+    }
+  }, 100)
+}
+
+export { calcDayDiff, updateStatsDiv, shareSquares}
