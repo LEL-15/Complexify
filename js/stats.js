@@ -74,6 +74,7 @@ export function endGame(win, numTries){
     if(win){
       dict["history"]["win"] += 1;
       if (!("tries" in dict)){
+        console.log("adding tries")
         dict["tries"] = {1: 0, 2: 0, 3: 0, 4:0, 5:0, 6:0};
       }
       dict["tries"][numTries+1] += 1;
@@ -98,6 +99,10 @@ export function closeStats(){
 }
 
 function displayGraph(stats){
+  if (!("tries" in stats)){
+    console.log("adding tries")
+    stats["tries"] = {1: 0, 2: 0, 3: 0, 4:0, 5:0, 6:0};
+  }
   var xValues = Object.keys(stats['tries']);
   var yValues = Object.values(stats['tries']);
   var barColors = new Array(Object.keys(stats['tries']).length).fill("lightgreen");
