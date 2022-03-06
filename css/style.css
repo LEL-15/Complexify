@@ -104,7 +104,7 @@ font-family: 'Open Sans', sans-serif; */
   display: flex;
   flex-flow: row;
   justify-content: space-around;
-  align-items: center;
+
 }
 .title-row {
   display: flex;
@@ -277,4 +277,6 @@ em{
   line-height: fit-content;
   padding: 10px;
 }
-
+.padding{
+  padding: 10px;
+}

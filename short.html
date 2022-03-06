@@ -101,8 +101,8 @@
                 <span class="content-wrapper">
                   <canvas id="statsChart" style="width:100%;max-width:600px"></canvas>
                 </span>
-                <span id="share_span" class="content-wrapper">
-                  <span id="share" class="icons material-icons">&#xe80d;</span>
+                <span id="share_span" class="content-wrapper-vertical">
+                  <div><span id="share" class="icons material-icons">&#xe80d;</span></div>
                   <span class="fade-popup" id="myPopup">Copied to clipboard!</span>
                 </span>
                 
@@ -111,14 +111,14 @@
               <section id="settings_popup" class="popup">
                 <h2> Settings </h2>
                 <span id="close_settings" class="icons material-icons close">&#xe5cd;</span>
-                <span class="content-wrapper">
-                  <p> Complexify Short </p>
-                  <div>
+                <span class="title-row">
+                  <div style="padding:10px;">
                     <label class="switch" id="toggle_short">
                       <input type="checkbox" checked>
                       <span class="slider round"></span>
                     </label>
                   </div>
+                  <p> Complexify Short </p>
                 </span>
               </section>
 
