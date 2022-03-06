@@ -2,10 +2,11 @@ import { displayInstructions, closeInstructions} from './instructions.js';
 
 function calcDayDiff(date1, date2){
   // To calculate the time difference of two dates
-  var Difference_In_Time = date2 - date1;
+  var Difference_In_Time = date2-date1;
+  console.log(Difference_In_Time)
   // To calculate the no. of days between two dates
   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
+  console.log(Difference_In_Days)
   return Difference_In_Days
 }
 
@@ -31,10 +32,6 @@ function updateStatsDiv(){
     wins.innerHTML = "Win %: " + ((dict["history"]["win"] / (dict["history"]["win"] + dict["history"]["loss"])) * 100 ).toString()
   }
   //Write the streak data
-  var now = new Date()
-  if(calcDayDiff(dict["lastPlay"], now) > 1){
-    dict["currentStreak"] = 0
-  }
   var streak = document.getElementById("current_streak");
   streak.innerHTML = "Current Streak: " + dict["currentStreak"]
 
@@ -50,28 +47,37 @@ function updateStatsDiv(){
 }
 
 export function endGame(win, numTries){
-  var dict = JSON.parse(window.localStorage.getItem("stats"));
-  //Update gamesPlayed
-  dict["gamesPlayed"] += 1
-  //Update streak records
-  dict["currentStreak"] += 1
-  if (dict["currentStreak"] > dict["bestStreak"]){
-    dict["bestStreak"] = dict["currentStreak"]
-  }
-  //Update win/loss stats
-  if(win){
-    dict["history"]["win"] += 1
-    if (!("tries" in dict)){
-      dict["tries"] = {1: 0, 2: 0, 3: 0, 4:0, 5:0, 6:0}
+  var won = JSON.parse(window.localStorage.getItem("won"));
+  if( won == null || won == False){
+    var dict = JSON.parse(window.localStorage.getItem("stats"));
+    //Update gamesPlayed
+    dict["gamesPlayed"] += 1
+    //Update streak records
+    var now = new Date();
+    if(calcDayDiff(dict["lastPlay"], now) > 1){
+      dict["currentStreak"] = 0
     }
-    dict["tries"][numTries+1] += 1
+    dict['lastPlay'] = now;
+    dict["currentStreak"] += 1
+    if (dict["currentStreak"] > dict["bestStreak"]){
+      dict["bestStreak"] = dict["currentStreak"]
+    }
+    //Update win/loss stats
+    if(win){
+      dict["history"]["win"] += 1;
+      if (!("tries" in dict)){
+        dict["tries"] = {1: 0, 2: 0, 3: 0, 4:0, 5:0, 6:0};
+      }
+      dict["tries"][numTries+1] += 1;
+    }
+    else{
+      dict["history"]["loss"] += 1;
+    }
+    window.localStorage.setItem("stats", JSON.stringify(dict));
+    updateStatsDiv();
+    displayStats();
+    localStorage.setItem('won', JSON.stringify(true));
   }
-  else{
-    dict["history"]["loss"] += 1
-  }
-  window.localStorage.setItem("stats", JSON.stringify(dict));
-  updateStatsDiv()
-  displayStats()
 }
 
 export function displayStats(){

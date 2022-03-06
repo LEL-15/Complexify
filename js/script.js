@@ -1,23 +1,46 @@
 import { processAnswer } from './processEquation.js';
-import { endGame, displayStats, closeStats } from './stats.js';
+import { endGame, displayStats, closeStats, calcDayDiff } from './stats.js';
 import { displaySettings, closeSettings} from './settings.js';
 import { displayFeedback, displayError, closeFeedback} from './feedback.js';
 import { displayInstructions, closeInstructions, closeInstructionsContinue} from './instructions.js';
 import { startGame } from "./start.js"
 
-var boardState = ["", "", "", "", "", ""];
-var currentGuess = 0;
+//Constants
 var numTries = 6;
 var numGameTiles = 10;
-var numKeyboard = 20;
+
+//See if reload is new day
+console.log("First thing!")
+var boardState = JSON.parse(window.localStorage.getItem("boardState"));
+console.log(boardState)
+//First time!
+if (boardState == null){
+  console.log("first time")
+  boardState = ["", "", "", "", "", ""];
+}
+else{
+  console.log("A returner")
+  var now  = new Date();
+  var currentGuess = 0;
+  var lastLoad = JSON.parse(window.localStorage.getItem("lastLoad"));
+  lastLoad = new Date(lastLoad);
+  //Reset
+  if(lastLoad == null || calcDayDiff(lastLoad, now) > 1){
+    console.log("It's a new day!")
+    boardState = ["", "", "", "", "", ""];
+    localStorage.setItem('tile', "");
+    localStorage.setItem('won', JSON.stringify(false));
+  }
+}
+lastLoad = now;
+localStorage.setItem('boardState', JSON.stringify(boardState));
+localStorage.setItem('lastLoad', JSON.stringify(lastLoad));
+localStorage.setItem('tile', "");
+
 var start = startGame()
 var prompt = start[1];
 var answer = start[0];
 
-// Setup environment
-// clear localStorage
-localStorage.setItem('tile', "");
-localStorage.setItem('boardState', boardState);
 // Setup empty board
 for(var i=0; i < numTries; i++){
   let tries = document.createElement('div');
@@ -31,6 +54,24 @@ for(var i=0; i < numTries; i++){
     tries.appendChild(gameTiles);
   }
   document.getElementById('game-board').appendChild(tries);
+}
+//Fill the board if boardState is non-null
+if (boardState[0] != ""){
+  for(let i=0;i < boardState.length; i+=1){
+    let triesCurrent = document.getElementById("tries"+currentGuess);
+    if (boardState[i] != ""){
+      for(let j = 0; j < boardState[i].length; j+=1){
+        let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + j);
+        var write = boardState[i][j];
+        if (write == "^"){
+          write = document.getElementById("square").innerHTML;
+        }
+        addTileLocalStorage(boardState[i][j]);
+        gameTile.innerHTML = write;
+      }
+      enterTiles();
+    }
+  }
 }
 
 var fullKeyboard = document.getElementsByClassName("keyboard-tile");
@@ -108,8 +149,6 @@ document.getElementById("close_instructions_continue").addEventListener("click",
   closeInstructions();
 })
 
-
-
 // add a square root tile to the game board
 export function addSquare(){
   var currentTiles = localStorage.getItem('tile');
@@ -121,6 +160,7 @@ export function addSquare(){
     addTileLocalStorage("^");
   }
 }
+
 // add a regular number or operation to the game board
 export function addTile(tile){
   var currentTiles = localStorage.getItem('tile');
@@ -166,6 +206,9 @@ export function enterTiles(){
     if (dict["right"]){
       // call win pop up
       setColors(dict["greens"], dict["blues"]);
+      boardState[currentGuess] = currentTiles;
+      localStorage.setItem('tile', "");
+      localStorage.setItem('boardState', JSON.stringify(boardState));
       endGame(true, currentGuess);
     }
     else if (!dict["legal"]){
@@ -180,58 +223,58 @@ export function enterTiles(){
       // change current Guess
       boardState[currentGuess] = currentTiles;
       localStorage.setItem('tile', "");
-      localStorage.setItem("boardState", boardState);
+      localStorage.setItem('boardState', JSON.stringify(boardState));
       currentGuess += 1;
       if(currentGuess === numTries || currentGuess > numTries){
         endGame(false, currentGuess);
       }
     }
-
   }
-  function setColors(greens, blues){
-    let triesCurrent = document.getElementById("tries"+currentGuess);
-    for(var i = 0; i<numGameTiles; i++){
-      let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + i.toString());
-      if(greens.includes(i)){
-        gameTile.style.backgroundColor = "lightgreen";
-        var character = gameTile.innerHTML
-        if (character.length > 1){
-          var character_button = document.getElementById("square")
-          character_button.style.backgroundColor = "lightgreen"
-        }
-        else{
-          var character_button = document.getElementById(character)
-          character_button.style.backgroundColor = "lightgreen"
-        }
-        
+}
+
+function setColors(greens, blues){
+  let triesCurrent = document.getElementById("tries"+currentGuess);
+  for(var i = 0; i<numGameTiles; i++){
+    let gameTile = document.getElementById(triesCurrent.id + "game-tiles" + i.toString());
+    if(greens.includes(i)){
+      gameTile.style.backgroundColor = "lightgreen";
+      var character = gameTile.innerHTML
+      if (character.length > 1){
+        var character_button = document.getElementById("square")
+        character_button.style.backgroundColor = "lightgreen"
       }
-      else if(blues.includes(i)){
-        gameTile.style.backgroundColor = "lightblue";
-        var character = gameTile.innerHTML
-        if (character.length > 1){
-          var character_button = document.getElementById("square")
-          if (character_button.style.backgroundColor != "lightgreen"){
-            character_button.style.backgroundColor = "lightblue"
-          }
-        }
-        else{
-          var character_button = document.getElementById(character)
-          if (character_button.style.backgroundColor != "lightgreen"){
-            character_button.style.backgroundColor = "lightblue"
-          }
+      else{
+        var character_button = document.getElementById(character)
+        character_button.style.backgroundColor = "lightgreen"
+      }
+      
+    }
+    else if(blues.includes(i)){
+      gameTile.style.backgroundColor = "lightblue";
+      var character = gameTile.innerHTML
+      if (character.length > 1){
+        var character_button = document.getElementById("square")
+        if (character_button.style.backgroundColor != "lightgreen"){
+          character_button.style.backgroundColor = "lightblue"
         }
       }
       else{
-        gameTile.style.backgroundColor = "grey";
-        var character = gameTile.innerHTML
-        if (character.length > 1){
-          var character_button = document.getElementById("square")
-          character_button.style.backgroundColor = "grey"
+        var character_button = document.getElementById(character)
+        if (character_button.style.backgroundColor != "lightgreen"){
+          character_button.style.backgroundColor = "lightblue"
         }
-        else{
-          var character_button = document.getElementById(character)
-          character_button.style.backgroundColor = "grey"
-        }
+      }
+    }
+    else{
+      gameTile.style.backgroundColor = "grey";
+      var character = gameTile.innerHTML
+      if (character.length > 1){
+        var character_button = document.getElementById("square")
+        character_button.style.backgroundColor = "grey"
+      }
+      else{
+        var character_button = document.getElementById(character)
+        character_button.style.backgroundColor = "grey"
       }
     }
   }
