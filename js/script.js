@@ -20,18 +20,19 @@ export function begin(numGameTilesGiven){
   answer = start[0];
   //See if reload is new day
   var boardState = getFromStorage("boardState");
-  console.log("board states")
-  console.log(boardState)
-  var lastLoad = getFromStorage("lastLoad");
+  // proccess the date lastLoad from storage
+  var proccesslastLoad = getFromStorage("lastLoad").split("\"");
+  proccesslastLoad = proccesslastLoad[1].split("T");
+  var lastLoad = new Date(proccesslastLoad[0]);
   //First time!
-  if (boardState == null || lastLoad==null){
+  if (boardState == null || lastLoad==null || isNaN(lastLoad)){
     console.log("first time")
     boardState = ["", "", "", "", "", ""];
   }
   else{
     console.log("A returner")
-    lastLoad = new Date(lastLoad);
     //Reset
+    console.log("Day Different: ", calcDayDiff(lastLoad, now))
     if(lastLoad == null || calcDayDiff(lastLoad, now) > 1){
       console.log("It's a new day!")
       boardState = ["", "", "", "", "", ""];
