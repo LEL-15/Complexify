@@ -126,32 +126,37 @@ def prepareForSimplify(equations):
     return answer
 
 num_eq = 1000
-num_char = 10
+num_char = 6
 pick_char = 0
 pick_operation = 1
 pick_char_or_operation = 2
+paren_odds = 0
 #Let's make some equations!
 equations = []
 for x in range(num_eq):
     #This is our equation
     equation = " " * num_char
-    #Let's start by placing the parens
-    open_paren_loc = random.randint(0, num_char-3)
-    equation = replacer(equation, "(", open_paren_loc)
-    options = list(range(open_paren_loc + 2, num_char-2)) + [num_char-1]
-    close_paren_loc = random.choice(options)
-    equation = replacer(equation, ")", close_paren_loc)
-    #Okay, let's fill in those parens
-    in_paren = fillNoParen(close_paren_loc - open_paren_loc -1, start=pick_char)
-    equation = replacer(equation, in_paren, open_paren_loc+1)
-    #Part before the parens
-    before_paren = fillNoParen(open_paren_loc, start=pick_char, end_op=True)
-    equation = replacer(equation, before_paren, 0)
-    #Part after the parens
-    if(num_char-close_paren_loc-1 > 0):
-        after_paren = fillNoParen(num_char-close_paren_loc-1, start=pick_operation, end_op=False)
-        equation = replacer(equation, after_paren, close_paren_loc+1)
+    if (random.uniform(0, 1) < paren_odds):
+        #Let's start by placing the parens
+        open_paren_loc = random.randint(0, num_char-3)
+        equation = replacer(equation, "(", open_paren_loc)
+        options = list(range(open_paren_loc + 2, num_char-2)) + [num_char-1]
+        close_paren_loc = random.choice(options)
+        equation = replacer(equation, ")", close_paren_loc)
+        #Okay, let's fill in those parens
+        in_paren = fillNoParen(close_paren_loc - open_paren_loc -1, start=pick_char)
+        equation = replacer(equation, in_paren, open_paren_loc+1)
+        #Part before the parens
+        before_paren = fillNoParen(open_paren_loc, start=pick_char, end_op=True)
+        equation = replacer(equation, before_paren, 0)
+        #Part after the parens
+        if(num_char-close_paren_loc-1 > 0):
+            after_paren = fillNoParen(num_char-close_paren_loc-1, start=pick_operation, end_op=False)
+            equation = replacer(equation, after_paren, close_paren_loc+1)
+    else:
+        equation = fillNoParen(len(equation), start=pick_char, end_op=False)
     equations.append(equation)
+
 write_equations = equations
 equations = prettify(equations)
 print(equations)
@@ -177,11 +182,11 @@ for equation in range(len(simplified)):
         simplified_good.append(simple_equation)
         equations_good.append(write_equations[equation])
 
-f = open("answers.txt", "a")
+f = open("shortAnswers.txt", "a")
 f.write(str(equations_good))
 f.close()
 
-f = open("simplified.txt", "a")
+f = open("shortSimplified.txt", "a")
 f.write(str(simplified_good))
 f.close()
 
