@@ -21,9 +21,14 @@ export function begin(numGameTilesGiven){
   //See if reload is new day
   var boardState = getFromStorage("boardState");
   // proccess the date lastLoad from storage
-  var proccesslastLoad = getFromStorage("lastLoad").split("\"");
-  proccesslastLoad = proccesslastLoad[1].split("T");
-  var lastLoad = new Date(proccesslastLoad[0]);
+  var proccesslastLoad = getFromStorage("lastLoad");
+  if(proccesslastLoad != undefined){
+    if(proccesslastLoad.includes("\"") || proccesslastLoad.includes("T")){
+      proccesslastLoad = proccesslastLoad.split("\"");
+      proccesslastLoad = proccesslastLoad[1].split("T")[0];
+    }
+  }
+  var lastLoad = new Date(proccesslastLoad);
   //First time!
   if (boardState == null || lastLoad==null || isNaN(lastLoad)){
     console.log("first time")
