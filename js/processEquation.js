@@ -50,7 +50,8 @@ export function processAnswer(answer, entered, prompt){
     prompt = prompt.replaceAll("**2", "^2")
     var combined = simplified + "-(" + prompt + ")"
     var diff = math.rationalize(combined).toString()
-    if (diff === "0"){
+    console.log(diff)
+    if (diff === "0" || diff[0] == "0"){
       valid = true
     }
     //Only proceed if the equation matches the simplified prompt
