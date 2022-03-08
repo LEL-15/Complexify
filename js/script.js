@@ -22,9 +22,11 @@ export function begin(numGameTilesGiven){
   var boardState = getFromStorage("boardState");
   // proccess the date lastLoad from storage
   var proccesslastLoad = getFromStorage("lastLoad");
-  if(proccesslastLoad.includes("\"") || proccesslastLoad.includes("T")){
-    proccesslastLoad = proccesslastLoad.split("\"");
-    proccesslastLoad = proccesslastLoad[1].split("T")[0];
+  if(proccesslastLoad != undefined){
+    if(proccesslastLoad.includes("\"") || proccesslastLoad.includes("T")){
+      proccesslastLoad = proccesslastLoad.split("\"");
+      proccesslastLoad = proccesslastLoad[1].split("T")[0];
+    }
   }
   var lastLoad = new Date(proccesslastLoad);
   //First time!
